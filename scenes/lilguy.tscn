@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfb7kxmg2nuu"]
+
+[ext_resource type="Texture2D" uid="uid://byv5tcjkwjyfo" path="res://assets/icon.svg" id="1_dd4dq"]
+[ext_resource type="Script" uid="uid://blq2d2cx65ilb" path="res://scripts/lilguy.gd" id="1_dgipi"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dgipi"]
+radius = 2.0
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_dgipi")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.18233, 0)
+billboard = 1
+shaded = true
+texture_filter = 0
+texture = ExtResource("1_dd4dq")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="."]
+visible = false
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+visible = false
+shape = SubResource("SphereShape3D_dgipi")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,471 @@
+[gd_scene load_steps=29 format=3 uid="uid://d3tdqoloywmmg"]
+
+[ext_resource type="Script" uid="uid://bodje56a2exsf" path="res://scripts/main.gd" id="1_85g3d"]
+[ext_resource type="Shader" uid="uid://dvcrrajh2qegl" path="res://assets/postprocessing.gdshader" id="1_tefeu"]
+[ext_resource type="Script" uid="uid://c1djhr360shxt" path="res://scripts/world.gd" id="2_o6xl0"]
+[ext_resource type="Shader" uid="uid://bg05amitbh15c" path="res://assets/sky.gdshader" id="3_tipki"]
+[ext_resource type="Script" uid="uid://bohpwmymnnrq2" path="res://scripts/camera_3d.gd" id="4_85g3d"]
+[ext_resource type="Script" uid="uid://bhy2of5hk31q0" path="res://scripts/hexgrid.gd" id="5_choun"]
+[ext_resource type="PackedScene" uid="uid://cc18uumvtbd18" path="res://hexglbs/forest.glb" id="6_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://dfb7kxmg2nuu" path="res://scenes/lilguy.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://bkkal5ayoa05i" path="res://scenes/actor.tscn" id="8_tipki"]
+[ext_resource type="Texture2D" uid="uid://i1li7i8liyit" path="res://assets/mouse.png" id="10_choun"]
+
+[sub_resource type="Gradient" id="Gradient_7mycd"]
+offsets = PackedFloat32Array(0, 0.114754, 0.454918, 0.798701, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.27, 0.201375, 0.1053, 1, 0, 0.208, 0.39, 1, 1, 0.87451, 0.470588, 1, 1, 0.958333, 0.9, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_272bh"]
+gradient = SubResource("Gradient_7mycd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
+shader = ExtResource("1_tefeu")
+shader_parameter/gradient_texture = SubResource("GradientTexture1D_272bh")
+shader_parameter/mix_strength = 0.5
+shader_parameter/opacity = 1.0
+shader_parameter/blend_mode = 0
+shader_parameter/hue_shift = 4.75e-08
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tefeu"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o6xl0"]
+width = 1920
+height = 1080
+noise = SubResource("FastNoiseLite_tefeu")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tipki"]
+frequency = 0.0256
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tipki"]
+noise = SubResource("FastNoiseLite_tipki")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o6xl0"]
+shader = ExtResource("3_tipki")
+shader_parameter/day_top_color = Color(0.1, 0.6, 1, 1)
+shader_parameter/day_bottom_color = Color(0.4, 0.8, 1, 1)
+shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
+shader_parameter/sunset_bottom_color = Color(1, 0.5, 0.7, 1)
+shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
+shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
+shader_parameter/horizon_color = Color(0, 0.7, 0.8, 1)
+shader_parameter/horizon_blur = 0.05
+shader_parameter/sun_color = Color(10, 8, 1, 1)
+shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
+shader_parameter/sun_size = 0.2
+shader_parameter/sun_blur = 10.0
+shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
+shader_parameter/moon_size = 0.06
+shader_parameter/moon_blur = 0.1
+shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
+shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
+shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
+shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_direction = 0.2
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_cutoff = 0.3
+shader_parameter/clouds_fuzziness = 0.5
+shader_parameter/clouds_weight = 0.0
+shader_parameter/clouds_blur = 0.25
+shader_parameter/stars_speed = 1.0
+shader_parameter/overwritten_time = 0.0
+
+[sub_resource type="Sky" id="Sky_85g3d"]
+sky_material = SubResource("ShaderMaterial_o6xl0")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_85g3d")
+tonemap_mode = 3
+tonemap_exposure = 0.7
+tonemap_white = 1.5
+glow_enabled = true
+glow_intensity = 1.0
+glow_map = SubResource("NoiseTexture2D_tipki")
+fog_enabled = true
+fog_mode = 1
+fog_light_energy = 5.11
+fog_density = 1.0
+fog_height = 0.1
+fog_height_density = 2.5852
+fog_depth_begin = 8.0
+fog_depth_end = 2890.1
+volumetric_fog_density = 0.302
+volumetric_fog_albedo = Color(0.738881, 0.789871, 1, 1)
+volumetric_fog_detail_spread = 1.7411
+volumetric_fog_sky_affect = 0.1
+adjustment_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_1bvp3"]
+auto_exposure_speed = 0.01
+dof_blur_far_distance = 60.0
+dof_blur_far_transition = 200.0
+dof_blur_near_distance = 0.37
+dof_blur_amount = 0.05
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tefeu"]
+radius = 7.18871
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
+albedo_color = Color(0.235294, 0.560784, 1, 1)
+distance_fade_mode = 2
+distance_fade_min_distance = 500.0
+distance_fade_max_distance = 300.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lquwl"]
+material = SubResource("StandardMaterial3D_lquwl")
+size = Vector2(5000, 5000)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
+size = Vector3(2000, 0.5, 2000)
+
+[sub_resource type="Animation" id="Animation_272bh"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer2/ColorRect:color:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.0980392, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer2/ColorRect:color:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.254902, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer2/ColorRect:color:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.388235, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer2/ColorRect:color:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SubViewportContainer:stretch_shrink")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [100]
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SubViewportContainer/SubViewport/world/Node3D/Camera3D:fov")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(60, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/mix_strength")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+
+[sub_resource type="Animation" id="Animation_7mycd"]
+resource_name = "start"
+length = 4.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.566667)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer2/ColorRect:color:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.0980392, -0.25, 0, 0.25, 0, 0.0980392, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.566667, 1.24)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer2/ColorRect:color:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.254902, -0.25, 0, 0.25, 0, 0.254902, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.566667, 2.88167)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer2/ColorRect:color:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.388235, -0.25, 0, 0.25, 0, 0.388235, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.575, 2.88167)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer2/ColorRect:color:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.575, 2.88167)
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SubViewportContainer:stretch_shrink")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2.26667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [100, 3]
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SubViewportContainer/SubViewport/world/Node3D/Camera3D:fov")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, 0, 0, 0.433333, 33.5, 60, -1.06667, 41.5, 0, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/mix_strength")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.52, 2.92),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5vw27"]
+_data = {
+&"RESET": SubResource("Animation_272bh"),
+&"start": SubResource("Animation_7mycd")
+}
+
+[node name="Node" type="Node"]
+process_mode = 3
+script = ExtResource("1_85g3d")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 11
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+z_index = 7
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0980392, 0.254902, 0.388235, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = 6
+material = SubResource("ShaderMaterial_272bh")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+layer = 9
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer3"]
+modulate = Color(1, 1, 1, 0.0784314)
+z_index = 5
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = SubResource("NoiseTexture2D_o6xl0")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+z_index = -4
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 100
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+size = Vector2i(19, 10)
+size_2d_override = Vector2i(960, 540)
+render_target_update_mode = 4
+
+[node name="world" type="Node3D" parent="SubViewportContainer/SubViewport"]
+process_mode = 1
+script = ExtResource("2_o6xl0")
+daynight_time = 10.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/world"]
+environment = SubResource("Environment_h2yge")
+camera_attributes = SubResource("CameraAttributesPractical_1bvp3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/world"]
+transform = Transform3D(-0.866897, 0.498488, -1.47858e-06, -0.428924, -0.745919, 0.509537, 0.253997, 0.441718, 0.860448, 0, 0, 0)
+shadow_enabled = true
+shadow_blur = 2.0
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/world"]
+transform = Transform3D(-0.762789, -0.204927, 0.613317, 0.445217, 0.521421, 0.727944, -0.468972, 0.828326, -0.306498, 0, 0, 0)
+light_energy = 0.0
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+
+[node name="Hexgrid" type="Node3D" parent="SubViewportContainer/SubViewport/world"]
+script = ExtResource("5_choun")
+grid_size = 100
+
+[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport/world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+script = ExtResource("4_85g3d")
+
+[node name="Area3D2" type="Area3D" parent="SubViewportContainer/SubViewport/world/Node3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/world/Node3D/Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.86317)
+shape = SubResource("SphereShape3D_tefeu")
+debug_color = Color(0.94131, 1.07813e-05, 0.61116, 0.42)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/world/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 4, 0)
+current = true
+fov = 60.0
+size = 6.74
+near = 0.001
+
+[node name="LilGuy" parent="SubViewportContainer/SubViewport/world" instance=ExtResource("7_o6xl0")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/world"]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0.0536218, 0)
+mesh = SubResource("PlaneMesh_lquwl")
+
+[node name="forest" parent="SubViewportContainer/SubViewport/world" instance=ExtResource("6_ya4ey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.81749, 0, 2.47288)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/world"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/world/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4822, 0)
+shape = SubResource("BoxShape3D_lquwl")
+
+[node name="Actor\'" parent="SubViewportContainer/SubViewport/world" instance=ExtResource("8_tipki")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5vw27")
+}
+autoplay = "start"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+autostart = true
+
+[node name="Button" type="Button" parent="."]
+offset_right = 253.0
+offset_bottom = 127.0
+text = "Return To Base"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 506.0
+offset_right = 759.0
+offset_bottom = 127.0
+text = "Scouts"
+
+[node name="CheckButton" type="CheckButton" parent="."]
+offset_left = 253.0
+offset_right = 506.0
+offset_bottom = 127.0
+text = "Follow Player"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 999
+texture = ExtResource("10_choun")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Button" to="SubViewportContainer/SubViewport/world/Node3D" method="_on_button_pressed"]
+[connection signal="pressed" from="CheckButton" to="SubViewportContainer/SubViewport/world/Node3D" method="_on_check_button_pressed"]

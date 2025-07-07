@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkkal5ayoa05i"]
+
+[ext_resource type="Script" uid="uid://umk0m2qqf1ag" path="res://scripts/actor.gd" id="1_x4c43"]
+[ext_resource type="Texture2D" uid="uid://byv5tcjkwjyfo" path="res://assets/icon.svg" id="2_0qi0m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x4c43"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0qi0m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_x4c43")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+flip_h = true
+no_depth_test = true
+sprite_frames = SubResource("SpriteFrames_x4c43")
+frame_progress = 0.0346504
