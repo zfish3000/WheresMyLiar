@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d3tdqoloywmmg"]
+[gd_scene load_steps=28 format=3 uid="uid://d3tdqoloywmmg"]
 
 [ext_resource type="Script" uid="uid://bodje56a2exsf" path="res://scripts/main.gd" id="1_85g3d"]
 [ext_resource type="Shader" uid="uid://dvcrrajh2qegl" path="res://assets/postprocessing.gdshader" id="1_tefeu"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://bhy2of5hk31q0" path="res://scripts/hexgrid.gd" id="5_choun"]
 [ext_resource type="PackedScene" uid="uid://cc18uumvtbd18" path="res://hexglbs/forest.glb" id="6_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://dfb7kxmg2nuu" path="res://scenes/lilguy.tscn" id="7_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://bkkal5ayoa05i" path="res://scenes/actor.tscn" id="8_tipki"]
 [ext_resource type="Texture2D" uid="uid://i1li7i8liyit" path="res://assets/mouse.png" id="10_choun"]
 
 [sub_resource type="Gradient" id="Gradient_7mycd"]
@@ -431,8 +430,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.81749, 0, 2.47288)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/world/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4822, 0)
 shape = SubResource("BoxShape3D_lquwl")
-
-[node name="Actor\'" parent="SubViewportContainer/SubViewport/world" instance=ExtResource("8_tipki")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

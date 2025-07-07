@@ -139,23 +139,31 @@ extends Node3D
 class_name Actor
 
 @export var destination: Hex
-var path: Array = []
+var complete_path: Array = []
 var current_path_index: int = 0
-var moving: bool = true
+var moving: bool = false
 const GRID_WIDTH = 100
 
 # NEW: Accept setup externally
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("step"):
+		new_turn()
+
 func setup(start_index: int, end_index: int) -> void:
 	global_position = GameManager.tile_array[start_index].position
 	destination = GameManager.tile_array[end_index]
-	path = find_path(start_index, end_index)
+	complete_path = find_path(start_index, end_index)
+	print(complete_path)
+	print(self)
 
 
 func new_turn() -> void:
-	if moving or current_path_index >= path.size():
+	print(self)
+	if moving or current_path_index >= complete_path.size():
 		return
 
-	var next_index = path[current_path_index]
+	var next_index = complete_path[current_path_index]
 	var next_tile = GameManager.tile_array[next_index]
 	current_path_index += 1
 	moving = true
@@ -163,7 +171,7 @@ func new_turn() -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "global_position", next_tile.position, 0.2)
 	tween.finished.connect(func(): moving = false)
-	if current_path_index == path.size():
+	if current_path_index == complete_path.size():
 		_reached_destination()
 
 func _reached_destination():
@@ -179,13 +187,13 @@ func get_neighbors(index: int) -> Array:
 
 	var max_index = GameManager.tile_array.size() - 1
 
-	if up <= max_index and GameManager.walk_array[up]:
+	if up <= max_index: #and GameManager.walk_array[up]:
 		neighbors.append(up)
-	if down >= 0 and GameManager.walk_array[down]:
+	if down >= 0: # and GameManager.walk_array[down]:
 		neighbors.append(down)
-	if left % GRID_WIDTH != GRID_WIDTH - 1 and left >= 0 and GameManager.walk_array[left]:
+	if left % GRID_WIDTH != GRID_WIDTH - 1: # and left >= 0 and GameManager.walk_array[left]:
 		neighbors.append(left)
-	if right % GRID_WIDTH != 0 and right <= max_index and GameManager.walk_array[right]:
+	if right % GRID_WIDTH != 0: # and right <= max_index and GameManager.walk_array[right]:
 		neighbors.append(right)
 
 	return neighbors
