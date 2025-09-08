@@ -28,7 +28,6 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [resource]
-resource_local_to_scene = true
 resource_name = "unit_hex_mesh"
 _surfaces = [{
 "aabb": AABB(-0.577351, 0, -0.5, 1.1547, 0.25, 1),
