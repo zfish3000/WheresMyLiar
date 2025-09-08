@@ -6,6 +6,6 @@
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 modulate = Color(1, 0.387956, 0.319725, 1)
-billboard = 1
+billboard = 2
 no_depth_test = true
 texture = ExtResource("1_y88gp")

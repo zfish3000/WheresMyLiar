@@ -142,9 +142,15 @@ class_name Actor
 var complete_path: Array = []
 var current_path_index: int = 0
 var moving: bool = false
+var sprite: SpriteFrames
 const GRID_WIDTH = 100
 
 # NEW: Accept setup externally
+func _ready() -> void:
+	if sprite != null:
+		$AnimatedSprite3D.sprite_frames = sprite
+	else:
+		pass
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("step"):
@@ -153,6 +159,10 @@ func _process(delta: float) -> void:
 func setup(start_index: int, end_index: int) -> void:
 	global_position = GameManager.tile_array[start_index].position
 	destination = GameManager.tile_array[end_index]
+	if destination.found == false:
+		queue_free()
+	if destination.type == 3:
+		queue_free()
 	complete_path = find_path(start_index, end_index)
 	print(complete_path)
 	print(self)
@@ -176,6 +186,9 @@ func new_turn() -> void:
 
 func _reached_destination():
 	print("Reached destination!")
+	destination.build_lookout()
+	var tween = create_tween()
+	tween.tween_property($AnimatedSprite3D,'scale',0,0.1)
 
 func get_neighbors(index: int) -> Array:
 	var neighbors = []

@@ -27,6 +27,7 @@ var found = false
 var g
 var h
 var f
+var evil = false
 
 func set_label(score:String):
 	pass
@@ -42,7 +43,6 @@ func set_label(score:String):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
 	SignalBus.base_defined.connect(_base_defined)
 	
 	if index == base_index:
@@ -55,7 +55,6 @@ func _ready() -> void:
 	#randommeshes
 	#var meshrng = randi_range(0,(meshes.size()-1))
 	#$MeshInstance3D.mesh = meshes[meshrng]
-	var rotaterng = randi_range(0,3)
 	
 	#old procedural uising mositure
 	#if moisture>=0.2:
@@ -92,6 +91,7 @@ func _ready() -> void:
 		smog.position.y = 1.851
 		smog.position.y += altitude
 		add_child(smog)
+		reveal(10)
 		var finder = find_node.instantiate()
 		finder.position.y = 0
 		add_child(finder)
@@ -101,17 +101,6 @@ func _ready() -> void:
 	position.y = round(position.y+0.2)
 	position.y = clamp(position.y,0,0.17)
 	round(position.y)
-
-	
-	match rotaterng:
-		0:
-			$MeshInstance3D.rotation_degrees += Vector3(0,60,0)
-		1:
-			$MeshInstance3D.rotation_degrees += Vector3(0,120,0)
-		2:
-			$MeshInstance3D.rotation_degrees += Vector3(0,180,0)
-		3:
-			$MeshInstance3D.rotation_degrees += Vector3(0,0,0)
 			
 			
 	GameManager.walk_array.append(walkable)
@@ -121,13 +110,10 @@ func _ready() -> void:
 		set_label(str(round(score)))
 		GameManager.score_array.append(score)
 	
-	$Label3D.text=str(index)
 
-
-func _process(delta: float) -> void:
-	
-
+func find():
 	if found:
+		$MeshInstance3D.scale = Vector3(0.95,0.95,0.95)
 		match type:
 			0:
 				$MeshInstance3D.mesh = meshes[0]
@@ -143,14 +129,31 @@ func _process(delta: float) -> void:
 				$MeshInstance3D.mesh = meshes[5]
 			6:
 				$MeshInstance3D.mesh = meshes[6]
+		var rotaterng = randi_range(0,3)
+		match rotaterng:
+			0:
+				$MeshInstance3D.rotation_degrees += Vector3(0,60,0)
+			1:
+				$MeshInstance3D.rotation_degrees += Vector3(0,120,0)
+			2:
+				$MeshInstance3D.rotation_degrees += Vector3(0,180,0)
+			3:
+				$MeshInstance3D.rotation_degrees += Vector3(0,0,0)
 	else:
 		if base:
 			return
 		else:
 			$MeshInstance3D.mesh = meshes[7]
-		
+
+func _process(delta: float) -> void:
+	pass
+
+
+	
 func _on_area_3d_area_entered(area: Area3D) -> void:
 	found = true
+	find()
+	pass
 
 func _on_area_3d_area_exited(area: Area3D) -> void:
 	found = true
@@ -163,3 +166,28 @@ func _base_defined():
 
 func _on_area_3d_mouse_entered() -> void:
 	scale = Vector3(0.7,0.7,0.7)
+	
+func build_lookout():
+	var LOOKOUT = load("res://hexmeshes/lookout.res")
+	var LOOKOUT_UC = load("res://hexmeshes/lookoutUC.res")
+	$MeshInstance3D.mesh = LOOKOUT_UC
+	var particle_scene : PackedScene = load("res://scenes/construction_particles.tscn")
+	var particle_child = particle_scene.instantiate()
+	add_child(particle_child)
+	#await get_tree().create_timer(5).timeout
+	particle_child.queue_free()
+	$MeshInstance3D.mesh = LOOKOUT
+	evil = true
+	reveal(5)
+	
+
+	
+func reveal(size:float=1):
+	var reveal_scene : PackedScene = load("res://reveal.tscn")
+	var reveal = reveal_scene.instantiate()
+	reveal.size = size
+	add_child(reveal)
+	
+	
+	
+	

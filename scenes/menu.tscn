@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b2moqdfvdqvht"]
+[gd_scene load_steps=26 format=3 uid="uid://b2moqdfvdqvht"]
 
 [ext_resource type="Script" uid="uid://cia02h18arp7c" path="res://scripts/menu.gd" id="1_vjb58"]
 [ext_resource type="FontFile" uid="uid://84h2yrdfv5j6" path="res://assets/RustyHooks.ttf" id="1_yqeox"]
@@ -6,15 +6,32 @@
 [ext_resource type="Shader" uid="uid://cf8so48oob53x" path="res://scenes/bg.gdshader" id="2_g3eks"]
 [ext_resource type="Shader" uid="uid://bgl7lrf1j0bf2" path="res://assets/ui.gdshader" id="2_mhnvy"]
 [ext_resource type="Texture2D" uid="uid://i1li7i8liyit" path="res://assets/mouse.png" id="5_4ytvr"]
+[ext_resource type="LabelSettings" uid="uid://cao8tvx0dc6yt" path="res://label1.tres" id="6_i6lef"]
+
+[sub_resource type="Gradient" id="Gradient_i6lef"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0, 0, 1, 0.714212, 0.714212, 0.714212, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_70i5f"]
+gradient = SubResource("Gradient_i6lef")
+width = 128
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i6lef"]
 shader = ExtResource("2_g3eks")
-shader_parameter/color_one = Color(0.0980392, 0.254902, 0.388235, 1)
-shader_parameter/color_two = Color(0.25098, 0.00392157, 0, 1)
-shader_parameter/angle = 20.0
-shader_parameter/line_count = 20.0
-shader_parameter/speed = 1.0
-shader_parameter/blur = 0.0
+shader_parameter/gradient = SubResource("GradientTexture1D_70i5f")
+shader_parameter/circle_color = Color(0.0980392, 0.254902, 0.388235, 1)
+shader_parameter/circle_multiplier = 15.0
+shader_parameter/speed = 0.5
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/rotation = Transform2D(0.525, 0.85, -0.85, 0.525, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_v86rl"]
+interpolation_mode = 2
+colors = PackedColorArray(0.25098, 0.00392157, 0, 1, 0.0980392, 0.254902, 0.388235, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_13sgg"]
+gradient = SubResource("Gradient_v86rl")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4ytvr"]
 shader = ExtResource("2_mhnvy")
@@ -59,6 +76,7 @@ shader_parameter/seed = 42.0
 content_margin_top = 20.0
 content_margin_bottom = 20.0
 bg_color = Color(0.25098, 0.00392157, 0, 1)
+border_width_right = 4610
 border_color = Color(0.0980392, 0.254902, 0.388235, 1)
 border_blend = true
 
@@ -81,53 +99,6 @@ Button/styles/focus = SubResource("StyleBoxFlat_mhnvy")
 Button/styles/hover = SubResource("StyleBoxFlat_mhnvy")
 Button/styles/normal = SubResource("StyleBoxFlat_g3eks")
 Button/styles/pressed = SubResource("StyleBoxFlat_4ytvr")
-
-[sub_resource type="LabelSettings" id="LabelSettings_v86rl"]
-font = ExtResource("1_yqeox")
-font_size = 120
-font_color = Color(1, 0.956863, 0.901961, 1)
-outline_size = 30
-outline_color = Color(0.0980392, 0.254902, 0.388235, 1)
-shadow_color = Color(0.25098, 0.00392157, 0, 0)
-stacked_outline_count = 1
-stacked_outline_0/size = 30
-stacked_outline_0/color = Color(0.25098, 0.00392157, 0, 1)
-
-[sub_resource type="Gradient" id="Gradient_mhnvy"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0.0107527, 0.897849)
-colors = PackedColorArray(0.25098, 0, 0, 1, 0.25098, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_4ytvr"]
-gradient = SubResource("Gradient_mhnvy")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0.8)
-metadata/_snap_enabled = true
-
-[sub_resource type="Curve" id="Curve_7ps7q"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_4ytvr"]
-curve = SubResource("Curve_7ps7q")
-
-[sub_resource type="Curve" id="Curve_ivknu"]
-_data = [Vector2(0, 0.54878), 0.0, 2.35459, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_mhnvy"]
-curve = SubResource("Curve_ivknu")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g3eks"]
-particle_flag_disable_z = true
-angle_min = -72000.0
-angle_max = 72000.0
-spread = 180.0
-initial_velocity_max = 164.2
-gravity = Vector3(0, -800, 0)
-scale_curve = SubResource("CurveTexture_mhnvy")
-alpha_curve = SubResource("CurveTexture_4ytvr")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v86rl"]
 shader = ExtResource("2_mhnvy")
@@ -196,16 +167,6 @@ _data = {
 &"startgame": SubResource("Animation_con2f")
 }
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mhnvy"]
-particle_flag_disable_z = true
-angle_min = -72000.0
-angle_max = 72000.0
-spread = 180.0
-initial_velocity_max = 164.2
-gravity = Vector3(0, 0, 0)
-scale_curve = SubResource("CurveTexture_mhnvy")
-alpha_curve = SubResource("CurveTexture_4ytvr")
-
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -232,9 +193,16 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0980392, 0.254902, 0.388235, 1)
 
+[node name="ColorRect" type="TextureRect" parent="ColorRect"]
+z_index = -350
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("GradientTexture1D_13sgg")
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -276,30 +244,10 @@ layout_mode = 0
 offset_right = 3605.0
 offset_bottom = 145.0
 text = "New Game"
-label_settings = SubResource("LabelSettings_v86rl")
+label_settings = ExtResource("6_i6lef")
 horizontal_alignment = 1
 vertical_alignment = 1
 visible_characters = 8
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="CenterContainer/VBoxContainer/Button"]
-visible = false
-position = Vector2(1400, 74)
-emitting = false
-amount = 100
-texture = SubResource("GradientTexture2D_4ytvr")
-randomness = 1.0
-trail_lifetime = 0.9
-process_material = SubResource("ParticleProcessMaterial_g3eks")
-
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="CenterContainer/VBoxContainer/Button"]
-visible = false
-position = Vector2(2205, 74)
-emitting = false
-amount = 100
-texture = SubResource("GradientTexture2D_4ytvr")
-randomness = 1.0
-trail_lifetime = 0.9
-process_material = SubResource("ParticleProcessMaterial_g3eks")
 
 [node name="Button2" type="Button" parent="CenterContainer/VBoxContainer"]
 material = SubResource("ShaderMaterial_v86rl")
@@ -310,32 +258,12 @@ theme_override_font_sizes/font_size = 120
 text = " "
 flat = true
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="CenterContainer/VBoxContainer/Button2"]
-visible = false
-position = Vector2(1400, 74)
-emitting = false
-amount = 100
-texture = SubResource("GradientTexture2D_4ytvr")
-randomness = 1.0
-trail_lifetime = 0.9
-process_material = SubResource("ParticleProcessMaterial_g3eks")
-
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="CenterContainer/VBoxContainer/Button2"]
-visible = false
-position = Vector2(2205, 74)
-emitting = false
-amount = 100
-texture = SubResource("GradientTexture2D_4ytvr")
-randomness = 1.0
-trail_lifetime = 0.9
-process_material = SubResource("ParticleProcessMaterial_g3eks")
-
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Button2"]
 layout_mode = 0
 offset_right = 3605.0
 offset_bottom = 145.0
 text = "Settings"
-label_settings = SubResource("LabelSettings_v86rl")
+label_settings = ExtResource("6_i6lef")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -348,32 +276,12 @@ theme_override_font_sizes/font_size = 120
 text = " "
 flat = true
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="CenterContainer/VBoxContainer/Button3"]
-visible = false
-position = Vector2(1400, 74)
-emitting = false
-amount = 100
-texture = SubResource("GradientTexture2D_4ytvr")
-randomness = 1.0
-trail_lifetime = 0.9
-process_material = SubResource("ParticleProcessMaterial_g3eks")
-
-[node name="GPUParticles2D2" type="GPUParticles2D" parent="CenterContainer/VBoxContainer/Button3"]
-visible = false
-position = Vector2(2205, 74)
-emitting = false
-amount = 100
-texture = SubResource("GradientTexture2D_4ytvr")
-randomness = 1.0
-trail_lifetime = 0.9
-process_material = SubResource("ParticleProcessMaterial_g3eks")
-
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Button3"]
 layout_mode = 0
 offset_right = 3605.0
 offset_bottom = 145.0
 text = "Quit"
-label_settings = SubResource("LabelSettings_v86rl")
+label_settings = ExtResource("6_i6lef")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -382,21 +290,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_4ytvr")
 }
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-visible = false
-position = Vector2(1364, 850)
-amount = 100
-texture = SubResource("GradientTexture2D_4ytvr")
-randomness = 1.0
-trail_lifetime = 0.9
-process_material = SubResource("ParticleProcessMaterial_mhnvy")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 999
+position = Vector2(960, 540)
 texture = ExtResource("5_4ytvr")
 
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_mouse_entered"]
-[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Button2" to="." method="_on_button_2_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/VBoxContainer/Button2" to="." method="_on_button_2_mouse_exited"]

@@ -19,6 +19,7 @@ script = ExtResource("1_x4c43")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 flip_h = true
+billboard = 2
 no_depth_test = true
 sprite_frames = SubResource("SpriteFrames_x4c43")
 frame_progress = 0.0346504

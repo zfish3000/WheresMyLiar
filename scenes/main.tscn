@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://d3tdqoloywmmg"]
+[gd_scene load_steps=30 format=3 uid="uid://d3tdqoloywmmg"]
 
 [ext_resource type="Script" uid="uid://bodje56a2exsf" path="res://scripts/main.gd" id="1_85g3d"]
 [ext_resource type="Shader" uid="uid://dvcrrajh2qegl" path="res://assets/postprocessing.gdshader" id="1_tefeu"]
+[ext_resource type="Shader" uid="uid://cow2q08mi8lc8" path="res://scenes/crt.gdshader" id="2_choun"]
 [ext_resource type="Script" uid="uid://c1djhr360shxt" path="res://scripts/world.gd" id="2_o6xl0"]
 [ext_resource type="Shader" uid="uid://bg05amitbh15c" path="res://assets/sky.gdshader" id="3_tipki"]
 [ext_resource type="Script" uid="uid://bohpwmymnnrq2" path="res://scripts/camera_3d.gd" id="4_85g3d"]
@@ -9,6 +10,21 @@
 [ext_resource type="PackedScene" uid="uid://cc18uumvtbd18" path="res://hexglbs/forest.glb" id="6_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://dfb7kxmg2nuu" path="res://scenes/lilguy.tscn" id="7_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://i1li7i8liyit" path="res://assets/mouse.png" id="10_choun"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_choun"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trceg"]
+resource_local_to_scene = true
+shader = ExtResource("2_choun")
+shader_parameter/tex = SubResource("ViewportTexture_choun")
+shader_parameter/mask_type = 0
+shader_parameter/curve = 1.0
+shader_parameter/sharpness = 0.666667
+shader_parameter/color_offset = 0.0
+shader_parameter/brightness = 1.0
+shader_parameter/aspect = 1.0
+shader_parameter/min_scanline_thickness = 1.0
 
 [sub_resource type="Gradient" id="Gradient_7mycd"]
 offsets = PackedFloat32Array(0, 0.114754, 0.454918, 0.798701, 1)
@@ -86,14 +102,15 @@ fog_enabled = true
 fog_mode = 1
 fog_light_energy = 5.11
 fog_density = 1.0
+fog_sky_affect = 0.0
 fog_height = 0.1
-fog_height_density = 2.5852
+fog_height_density = 0.1
 fog_depth_begin = 8.0
 fog_depth_end = 2890.1
-volumetric_fog_density = 0.302
+volumetric_fog_density = 1.0
 volumetric_fog_albedo = Color(0.738881, 0.789871, 1, 1)
-volumetric_fog_detail_spread = 1.7411
-volumetric_fog_sky_affect = 0.1
+volumetric_fog_detail_spread = 1.1487
+volumetric_fog_sky_affect = 0.0
 adjustment_enabled = true
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_1bvp3"]
@@ -102,9 +119,6 @@ dof_blur_far_distance = 60.0
 dof_blur_far_transition = 200.0
 dof_blur_near_distance = 0.37
 dof_blur_amount = 0.05
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_tefeu"]
-radius = 7.18871
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
 albedo_color = Color(0.235294, 0.560784, 1, 1)
@@ -124,7 +138,7 @@ length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/opacity")
+tracks/0/path = NodePath("ColorGrading/ColorRect:material:shader_parameter/opacity")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -135,7 +149,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer2/ColorRect:color:r")
+tracks/1/path = NodePath("IntroTransition/ColorRect:color:r")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -146,7 +160,7 @@ tracks/1/keys = {
 tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CanvasLayer2/ColorRect:color:g")
+tracks/2/path = NodePath("IntroTransition/ColorRect:color:g")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -157,7 +171,7 @@ tracks/2/keys = {
 tracks/3/type = "bezier"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CanvasLayer2/ColorRect:color:b")
+tracks/3/path = NodePath("IntroTransition/ColorRect:color:b")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -168,7 +182,7 @@ tracks/3/keys = {
 tracks/4/type = "bezier"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("CanvasLayer2/ColorRect:color:a")
+tracks/4/path = NodePath("IntroTransition/ColorRect:color:a")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -202,7 +216,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/mix_strength")
+tracks/7/path = NodePath("ColorGrading/ColorRect:material:shader_parameter/mix_strength")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -218,7 +232,7 @@ length = 4.0
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/opacity")
+tracks/0/path = NodePath("ColorGrading/ColorRect:material:shader_parameter/opacity")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -229,7 +243,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer2/ColorRect:color:r")
+tracks/1/path = NodePath("IntroTransition/ColorRect:color:r")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -240,7 +254,7 @@ tracks/1/keys = {
 tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CanvasLayer2/ColorRect:color:g")
+tracks/2/path = NodePath("IntroTransition/ColorRect:color:g")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -251,7 +265,7 @@ tracks/2/keys = {
 tracks/3/type = "bezier"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CanvasLayer2/ColorRect:color:b")
+tracks/3/path = NodePath("IntroTransition/ColorRect:color:b")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -262,7 +276,7 @@ tracks/3/keys = {
 tracks/4/type = "bezier"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("CanvasLayer2/ColorRect:color:a")
+tracks/4/path = NodePath("IntroTransition/ColorRect:color:a")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -296,7 +310,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("CanvasLayer/ColorRect:material:shader_parameter/mix_strength")
+tracks/7/path = NodePath("ColorGrading/ColorRect:material:shader_parameter/mix_strength")
 tracks/7/interp = 2
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -316,11 +330,11 @@ _data = {
 process_mode = 3
 script = ExtResource("1_85g3d")
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="IntroTransition" type="CanvasLayer" parent="."]
 layer = 11
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
-z_index = 7
+[node name="ColorRect" type="ColorRect" parent="IntroTransition"]
+z_index = 8
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -329,10 +343,24 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.0980392, 0.254902, 0.388235, 1)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="IntroTransition2" type="CanvasLayer" parent="."]
+layer = 11
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="IntroTransition2"]
+z_index = 7
+material = SubResource("ShaderMaterial_trceg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorGrading" type="CanvasLayer" parent="."]
 layer = 10
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="ColorGrading"]
 z_index = 6
 material = SubResource("ShaderMaterial_272bh")
 anchors_preset = 15
@@ -344,10 +372,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+[node name="Noise" type="CanvasLayer" parent="."]
 layer = 9
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer3"]
+[node name="TextureRect" type="TextureRect" parent="Noise"]
 modulate = Color(1, 1, 1, 0.0784314)
 z_index = 5
 offset_right = 1920.0
@@ -383,7 +411,7 @@ environment = SubResource("Environment_h2yge")
 camera_attributes = SubResource("CameraAttributesPractical_1bvp3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/world"]
-transform = Transform3D(-0.866897, 0.498488, -1.47858e-06, -0.428924, -0.745919, 0.509537, 0.253997, 0.441718, 0.860448, 0, 0, 0)
+transform = Transform3D(0.906724, -0.418398, -0.0528697, -0.110512, -0.356712, 0.927653, -0.406987, -0.835285, -0.36968, 0, 0, 0)
 shadow_enabled = true
 shadow_blur = 2.0
 
@@ -401,13 +429,6 @@ grid_size = 100
 [node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport/world"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 script = ExtResource("4_85g3d")
-
-[node name="Area3D2" type="Area3D" parent="SubViewportContainer/SubViewport/world/Node3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/world/Node3D/Area3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.86317)
-shape = SubResource("SphereShape3D_tefeu")
-debug_color = Color(0.94131, 1.07813e-05, 0.61116, 0.42)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/world/Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 4, 0)

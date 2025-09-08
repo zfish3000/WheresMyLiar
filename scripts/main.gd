@@ -16,11 +16,10 @@ func _process(delta: float) -> void:
 			tween.set_trans(Tween.TRANS_CUBIC)
 			paused = true
 		else:
+			get_tree().paused = false
 			var tween = get_tree().create_tween()
 			tween.tween_property(Engine,"time_scale",1,0.2)
 			tween.set_ease(Tween.EASE_OUT_IN)
 			tween.set_trans(Tween.TRANS_CUBIC)
 			paused = false
-	
-	$Sprite2D.position = lerp($Sprite2D.position, $CanvasLayer/ColorRect.get_global_mouse_position(), 0.5)
-		
+	$Sprite2D.position = lerp($Sprite2D.position, $IntroTransition/ColorRect.get_global_mouse_position(), 0.5)
