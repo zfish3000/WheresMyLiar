@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c0pvtb1s4dm36"]
+[gd_scene load_steps=13 format=3 uid="uid://c0pvtb1s4dm36"]
 
 [ext_resource type="Script" uid="uid://c7k8r5y2liatu" path="res://scripts/hex.gd" id="1_tqp3w"]
 [ext_resource type="ArrayMesh" uid="uid://dwu060hd4wky" path="res://hexmeshes/plain.tres" id="2_yklne"]
@@ -8,6 +8,7 @@
 [ext_resource type="ArrayMesh" uid="uid://b87u20ym7glnt" path="res://hexmeshes/evil.res" id="6_3u7x0"]
 [ext_resource type="ArrayMesh" uid="uid://5uw30p7f7mly" path="res://hexmeshes/village.res" id="7_sx706"]
 [ext_resource type="ArrayMesh" uid="uid://naj3tmq125er" path="res://hexmeshes/unfound.tres" id="8_yklne"]
+[ext_resource type="Script" uid="uid://ddxw0v0d051kh" path="res://resource.gd" id="9_mlyxx"]
 
 [sub_resource type="PlaceholderMesh" id="PlaceholderMesh_tqp3w"]
 
@@ -36,6 +37,10 @@ collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("SphereShape3D_tqp3w")
+
+[node name="BuildingMaterial" type="Node" parent="."]
+script = ExtResource("9_mlyxx")
+metadata/_custom_type_script = "uid://ddxw0v0d051kh"
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]

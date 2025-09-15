@@ -71,22 +71,34 @@ func _ready() -> void:
 			walkable = false
 		if altitude>=0.4:
 			type = 4
+			$BuildingMaterial.set_resource(4)
 			walkable = false
 		if altitude>=0.2 and altitude <0.4:
 			type=2
+			$BuildingMaterial.set_resource(2)
 		if altitude<0.2:
 			if village <0.5:
 				var bush = randi_range(0,3)
 				if bush < 3:
 					type=0
+					$BuildingMaterial.set_resource(0)
 				if bush == 3:
 					type=1
+					$BuildingMaterial.set_resource(1)
 			else:
 				type=6
+				$BuildingMaterial.set_resource(6)
+				var hero_spawner_scene : PackedScene = load("res://hero_spawner.tscn")
+				var hero_spawner = hero_spawner_scene.instantiate()
+				hero_spawner.hex_index = index
+				add_child(hero_spawner)
 		if land == false:
 			type = 3
+			$BuildingMaterial.set_resource(3)
 	elif base == true:
+		find()
 		type = 5
+		$BuildingMaterial.set_resource(5)
 		var smog = smog_particles.instantiate()
 		smog.position.y = 1.851
 		smog.position.y += altitude
@@ -112,7 +124,9 @@ func _ready() -> void:
 	
 
 func find():
-	if found:
+	if base:
+		$MeshInstance3D.mesh = meshes[5]
+	if !found:
 		$MeshInstance3D.scale = Vector3(0.95,0.95,0.95)
 		match type:
 			0:
@@ -139,11 +153,7 @@ func find():
 				$MeshInstance3D.rotation_degrees += Vector3(0,180,0)
 			3:
 				$MeshInstance3D.rotation_degrees += Vector3(0,0,0)
-	else:
-		if base:
-			return
-		else:
-			$MeshInstance3D.mesh = meshes[7]
+		found = true
 
 func _process(delta: float) -> void:
 	pass
@@ -151,12 +161,11 @@ func _process(delta: float) -> void:
 
 	
 func _on_area_3d_area_entered(area: Area3D) -> void:
-	found = true
 	find()
 	pass
 
 func _on_area_3d_area_exited(area: Area3D) -> void:
-	found = true
+	pass
 
 func _base_defined():
 	score = abs(position.x - GameManager.base_pos.x) + abs(position.z - GameManager.base_pos.z)

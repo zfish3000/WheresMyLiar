@@ -120,10 +120,10 @@ func _on_button_pressed() -> void:
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween2.set_trans(Tween.TRANS_CUBIC)
 	tween3.set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(self, "position", GameManager.base_pos + Vector3(0,0,2.5), 0.5)
+	tween.tween_property(actor, "position", GameManager.base_pos + Vector3(0,0,2.5), 0.5)
 	tween2.tween_property($Camera3D, "fov", 70, 0.15)
 	tween2.tween_property($Camera3D, "fov", 60, 0.35)
-	tween3.tween_property(self, "rotation", Vector3(0,0,0), 0.5)
+	tween3.tween_property(actor, "rotation", Vector3(0,0,0), 0.5)
 
 func _on_check_button_pressed() -> void:
 	if follow_player == false:

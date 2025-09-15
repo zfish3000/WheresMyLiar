@@ -200,7 +200,7 @@ extends Node3D
 		#GameManager.visited_array[current_id-1] = true
 		#var new_pos = pathfind()
 		#var tween = get_tree().create_tween()
-		#tween.tween_property(self, "position", new_pos, 0.2)
+		#tween.tween_property(actor, "position", new_pos, 0.2)
 #
 		#last_id = current_id
 		#pass

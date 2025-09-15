@@ -29,7 +29,7 @@ func _handle_highlight(raycast_result):
 		print("raycast result has collider: ", raycast_result.has("collider"))
 	if raycast_result and raycast_result.has("collider"): 
 		var hovered_object = raycast_result["collider"].get_parent()
-		if hovered_object == self:
+		if hovered_object == actor:
 			if mouseover_state == MouseOverStates.NOMOUSEOVER:
 				enable_highlight()
 		elif mouseover_state == MouseOverStates.MOUSEOVER:

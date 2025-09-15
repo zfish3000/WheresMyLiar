@@ -1,53 +1,35 @@
-[gd_scene load_steps=30 format=3 uid="uid://d3tdqoloywmmg"]
+[gd_scene load_steps=26 format=3 uid="uid://d3tdqoloywmmg"]
 
 [ext_resource type="Script" uid="uid://bodje56a2exsf" path="res://scripts/main.gd" id="1_85g3d"]
 [ext_resource type="Shader" uid="uid://dvcrrajh2qegl" path="res://assets/postprocessing.gdshader" id="1_tefeu"]
-[ext_resource type="Shader" uid="uid://cow2q08mi8lc8" path="res://scenes/crt.gdshader" id="2_choun"]
 [ext_resource type="Script" uid="uid://c1djhr360shxt" path="res://scripts/world.gd" id="2_o6xl0"]
 [ext_resource type="Shader" uid="uid://bg05amitbh15c" path="res://assets/sky.gdshader" id="3_tipki"]
 [ext_resource type="Script" uid="uid://bohpwmymnnrq2" path="res://scripts/camera_3d.gd" id="4_85g3d"]
+[ext_resource type="Shader" uid="uid://decwbmks4clva" path="res://scenes/outline.gdshader" id="4_eb6dy"]
+[ext_resource type="Texture2D" uid="uid://bl413otetar20" path="res://colorpalletes/1.tres" id="4_ya4ey"]
 [ext_resource type="Script" uid="uid://bhy2of5hk31q0" path="res://scripts/hexgrid.gd" id="5_choun"]
 [ext_resource type="PackedScene" uid="uid://cc18uumvtbd18" path="res://hexglbs/forest.glb" id="6_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://dfb7kxmg2nuu" path="res://scenes/lilguy.tscn" id="7_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://i1li7i8liyit" path="res://assets/mouse.png" id="10_choun"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_choun"]
-viewport_path = NodePath("SubViewportContainer/SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_trceg"]
-resource_local_to_scene = true
-shader = ExtResource("2_choun")
-shader_parameter/tex = SubResource("ViewportTexture_choun")
-shader_parameter/mask_type = 0
-shader_parameter/curve = 1.0
-shader_parameter/sharpness = 0.666667
-shader_parameter/color_offset = 0.0
-shader_parameter/brightness = 1.0
-shader_parameter/aspect = 1.0
-shader_parameter/min_scanline_thickness = 1.0
-
-[sub_resource type="Gradient" id="Gradient_7mycd"]
-offsets = PackedFloat32Array(0, 0.114754, 0.454918, 0.798701, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.27, 0.201375, 0.1053, 1, 0, 0.208, 0.39, 1, 1, 0.87451, 0.470588, 1, 1, 0.958333, 0.9, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_272bh"]
-gradient = SubResource("Gradient_7mycd")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
 shader = ExtResource("1_tefeu")
-shader_parameter/gradient_texture = SubResource("GradientTexture1D_272bh")
+shader_parameter/gradient_texture = ExtResource("4_ya4ey")
 shader_parameter/mix_strength = 0.5
 shader_parameter/opacity = 1.0
 shader_parameter/blend_mode = 0
 shader_parameter/hue_shift = 4.75e-08
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_tefeu"]
-frequency = 1.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o6xl0"]
-width = 1920
-height = 1080
-noise = SubResource("FastNoiseLite_tefeu")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trceg"]
+render_priority = 0
+shader = ExtResource("4_eb6dy")
+shader_parameter/shadows_enabled = false
+shader_parameter/highlights_enabled = false
+shader_parameter/shadow_strength = 0.4
+shader_parameter/highlight_strength = 0.1
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/is_perspective_camera = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tipki"]
 frequency = 0.0256
@@ -92,9 +74,11 @@ sky_material = SubResource("ShaderMaterial_o6xl0")
 [sub_resource type="Environment" id="Environment_h2yge"]
 background_mode = 2
 sky = SubResource("Sky_85g3d")
-tonemap_mode = 3
+tonemap_mode = 2
 tonemap_exposure = 0.7
 tonemap_white = 1.5
+ssao_enabled = true
+ssil_enabled = true
 glow_enabled = true
 glow_intensity = 1.0
 glow_map = SubResource("NoiseTexture2D_tipki")
@@ -190,36 +174,24 @@ tracks/4/keys = {
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
-tracks/5/type = "value"
+tracks/5/type = "bezier"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SubViewportContainer:stretch_shrink")
+tracks/5/path = NodePath("SubViewportContainer/SubViewport/world/Node3D/Camera3D:fov")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [100]
-}
-tracks/6/type = "bezier"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("SubViewportContainer/SubViewport/world/Node3D/Camera3D:fov")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(60, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("ColorGrading/ColorRect:material:shader_parameter/mix_strength")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorGrading/ColorRect:material:shader_parameter/mix_strength")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -284,36 +256,24 @@ tracks/4/keys = {
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0.575, 2.88167)
 }
-tracks/5/type = "value"
+tracks/5/type = "bezier"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SubViewportContainer:stretch_shrink")
-tracks/5/interp = 2
+tracks/5/path = NodePath("SubViewportContainer/SubViewport/world/Node3D/Camera3D:fov")
+tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 2.26667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [100, 3]
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(101.5, 0, 0, 1.5, 0, 55.5, -1.5, 0, 0, 0),
+"times": PackedFloat32Array(0.0666667, 2.5)
 }
-tracks/6/type = "bezier"
+tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("SubViewportContainer/SubViewport/world/Node3D/Camera3D:fov")
-tracks/6/interp = 1
+tracks/6/path = NodePath("ColorGrading/ColorRect:material:shader_parameter/mix_strength")
+tracks/6/interp = 2
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1, 0, 0, 0.433333, 33.5, 60, -1.06667, 41.5, 0, 0),
-"times": PackedFloat32Array(0, 2)
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("ColorGrading/ColorRect:material:shader_parameter/mix_strength")
-tracks/7/interp = 2
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0.52, 2.92),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -345,17 +305,6 @@ color = Color(0.0980392, 0.254902, 0.388235, 1)
 
 [node name="IntroTransition2" type="CanvasLayer" parent="."]
 layer = 11
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="IntroTransition2"]
-z_index = 7
-material = SubResource("ShaderMaterial_trceg")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 
 [node name="ColorGrading" type="CanvasLayer" parent="."]
 layer = 10
@@ -374,14 +323,17 @@ mouse_filter = 2
 
 [node name="Noise" type="CanvasLayer" parent="."]
 layer = 9
+visible = false
 
-[node name="TextureRect" type="TextureRect" parent="Noise"]
-modulate = Color(1, 1, 1, 0.0784314)
-z_index = 5
-offset_right = 1920.0
-offset_bottom = 1080.0
+[node name="ColorRect" type="ColorRect" parent="Noise"]
+z_index = 7
+material = SubResource("ShaderMaterial_trceg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
-texture = SubResource("NoiseTexture2D_o6xl0")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 z_index = -4
@@ -392,12 +344,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
-stretch_shrink = 100
+stretch_shrink = 3
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(19, 10)
+size = Vector2i(640, 360)
 size_2d_override = Vector2i(960, 540)
 render_target_update_mode = 4
 
@@ -425,6 +377,7 @@ shadow_enabled = true
 [node name="Hexgrid" type="Node3D" parent="SubViewportContainer/SubViewport/world"]
 script = ExtResource("5_choun")
 grid_size = 100
+noise_roughness = 0.07
 
 [node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport/world"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
@@ -438,13 +391,14 @@ size = 6.74
 near = 0.001
 
 [node name="LilGuy" parent="SubViewportContainer/SubViewport/world" instance=ExtResource("7_o6xl0")]
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/world"]
 transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0.0536218, 0)
 mesh = SubResource("PlaneMesh_lquwl")
 
 [node name="forest" parent="SubViewportContainer/SubViewport/world" instance=ExtResource("6_ya4ey")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.81749, 0, 2.47288)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.01349, 0, -6.63822)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="SubViewportContainer/SubViewport/world"]
 
