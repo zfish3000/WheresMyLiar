@@ -8,6 +8,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if GameManager.wood != null:
+		$Label.text = str(GameManager.wood)
+		$Label2.text = str(GameManager.stone)
+		$Label3.text = str(GameManager.pop)
+		$Label4.text = str(GameManager.gold)
 	if Input.is_action_just_pressed("pause"):
 		if paused == false:
 			var tween = get_tree().create_tween()

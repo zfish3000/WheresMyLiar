@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bptd8usm67glg"]
+
+[ext_resource type="PackedScene" uid="uid://bkkal5ayoa05i" path="res://scenes/actor.tscn" id="1_c81uy"]
+[ext_resource type="Script" uid="uid://4ehkft7np60b" path="res://gatherer.gd" id="2_6ym2q"]
+
+[node name="actor" instance=ExtResource("1_c81uy")]
+script = ExtResource("2_6ym2q")
+
+[connection signal="moved" from="nav" to="." method="_on_nav_moved"]

@@ -1,5 +1,8 @@
-#
-#extends Node3D
+extends Node3D
+class_name actor
+func setup(start_index,end_index):
+	$nav.setup(start_index,end_index)
+	global_position = GameManager.tile_array[start_index].position
 #class_name Actor
 #
 #@export var destination: Hex
@@ -16,9 +19,9 @@
 	#else:
 		#pass
 #
-#func _process(delta: float) -> void:
-	#if Input.is_action_just_pressed("step"):
-		#new_turn()
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("step"):
+		$nav.new_turn()
 #
 #func setup(start_index: int, end_index: int) -> void:
 	#global_position = GameManager.tile_array[start_index].position

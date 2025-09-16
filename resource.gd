@@ -1,10 +1,10 @@
 extends Node
 class_name BuildingMaterial
 
-var wood
-var stone
-var money
-var pop
+var wood = 0
+var stone = 0
+var money = 0
+var pop = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -12,6 +12,7 @@ func _ready() -> void:
 	pass
 
 func set_resource(hex_type:int):
+	print("heyo ",hex_type)
 	match hex_type:
 		0 or 1:
 			wood = randi_range(0,1)
@@ -43,7 +44,7 @@ func set_resource(hex_type:int):
 			stone = randi_range(0,1)
 			money = randi_range(3,4)
 			pop = randi_range(6,7)
-			
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

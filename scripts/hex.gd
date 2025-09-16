@@ -29,6 +29,9 @@ var h
 var f
 var evil = false
 
+@onready var building_material: BuildingMaterial = $BuildingMaterial
+
+
 func set_label(score:String):
 	pass
 	
@@ -71,34 +74,34 @@ func _ready() -> void:
 			walkable = false
 		if altitude>=0.4:
 			type = 4
-			$BuildingMaterial.set_resource(4)
+			building_material.set_resource(4)
 			walkable = false
 		if altitude>=0.2 and altitude <0.4:
 			type=2
-			$BuildingMaterial.set_resource(2)
+			building_material.set_resource(2)
 		if altitude<0.2:
 			if village <0.5:
 				var bush = randi_range(0,3)
 				if bush < 3:
 					type=0
-					$BuildingMaterial.set_resource(0)
+					building_material.set_resource(0)
 				if bush == 3:
 					type=1
-					$BuildingMaterial.set_resource(1)
+					building_material.set_resource(1)
 			else:
 				type=6
-				$BuildingMaterial.set_resource(6)
+				building_material.set_resource(6)
 				var hero_spawner_scene : PackedScene = load("res://hero_spawner.tscn")
 				var hero_spawner = hero_spawner_scene.instantiate()
 				hero_spawner.hex_index = index
 				add_child(hero_spawner)
 		if land == false:
 			type = 3
-			$BuildingMaterial.set_resource(3)
+			building_material.set_resource(3)
 	elif base == true:
 		find()
 		type = 5
-		$BuildingMaterial.set_resource(5)
+		building_material.set_resource(5)
 		var smog = smog_particles.instantiate()
 		smog.position.y = 1.851
 		smog.position.y += altitude
@@ -197,6 +200,12 @@ func reveal(size:float=1):
 	reveal.size = size
 	add_child(reveal)
 	
+	
+func add_resources():
+	GameManager.wood += building_material.wood
+	GameManager.stone += building_material.stone
+	GameManager.pop += building_material.pop
+	GameManager.gold += building_material.money
 	
 	
 	

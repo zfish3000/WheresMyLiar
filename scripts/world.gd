@@ -3,7 +3,7 @@ extends Node3D
 ## The Time It Takes For The Sun To Make 1 Full Rotation In Minutes
 @export var daynight_time:float = 600
 @onready var sub_viewport: SubViewport = $".."
-@onready var ACTOR = preload("res://scenes/actor.tscn")
+@onready var ACTOR = preload("res://Gatherer.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var daylight_cycle = create_tween()
