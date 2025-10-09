@@ -20,6 +20,7 @@ func _process(delta: float) -> void:
 		get_tree().reload_current_scene()
 
 func _ready() -> void:
+	GameManager.grid_size 
 	moisture.seed = randi()
 	village.seed = randi()
 	altitude.seed = randi()

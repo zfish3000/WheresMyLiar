@@ -144,9 +144,12 @@ var complete_path: Array = []
 var current_path_index: int = 0
 var moving: bool = false
 var sprite: SpriteFrames
+var reached_destination_bool= false
+var recall = false
 const GRID_WIDTH = 100
 
 signal moved
+signal reached_destination
 
 func setup(start_index: int, end_index: int) -> void:
 	global_position = GameManager.tile_array[start_index].position
@@ -178,7 +181,9 @@ func new_turn() -> void:
 	tween.finished.connect(func(): moving = false)
 	moved.emit()
 	if current_path_index == complete_path.size():
-		_reached_destination()
+		tween.finished.connect(func(): reached_destination.emit())
+		if recall == true:
+			current_path_index = 0
 	
 
 func _reached_destination():
@@ -187,7 +192,7 @@ func _reached_destination():
 	#var tween = create_tween()
 	#tween.tween_property($AnimatedSprite3D,'scale',0,0.1)
 	#queue_free()
-	pass
+	reached_destination.emit()
 
 func get_neighbors(index: int) -> Array:
 	var neighbors = []

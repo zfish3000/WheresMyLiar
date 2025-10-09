@@ -1,8 +1,9 @@
 extends Node3D
-class_name actor
+
+
 func setup(start_index,end_index):
 	$nav.setup(start_index,end_index)
-	global_position = GameManager.tile_array[start_index].position
+
 #class_name Actor
 #
 #@export var destination: Hex
@@ -111,3 +112,6 @@ func _process(delta: float) -> void:
 		#path.remove_at(0)
 #
 	#return path
+
+
+	

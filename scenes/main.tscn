@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://dvcrrajh2qegl" path="res://assets/postprocessing.gdshader" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://c1djhr360shxt" path="res://scripts/world.gd" id="2_o6xl0"]
 [ext_resource type="Shader" uid="uid://bg05amitbh15c" path="res://assets/sky.gdshader" id="3_tipki"]
-[ext_resource type="Texture2D" uid="uid://bdttl1l1ldg38" path="res://colorpalletes/4.tres" id="3_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://c2mq3mrcr0mtx" path="res://assets/pallete.png" id="3_ya4ey"]
 [ext_resource type="Script" uid="uid://bohpwmymnnrq2" path="res://scripts/camera_3d.gd" id="4_85g3d"]
 [ext_resource type="Shader" uid="uid://decwbmks4clva" path="res://scenes/outline.gdshader" id="4_eb6dy"]
 [ext_resource type="Script" uid="uid://bhy2of5hk31q0" path="res://scripts/hexgrid.gd" id="5_choun"]
@@ -77,6 +77,7 @@ sky = SubResource("Sky_85g3d")
 tonemap_mode = 2
 tonemap_exposure = 0.7
 tonemap_white = 1.5
+ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 glow_enabled = true

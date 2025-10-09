@@ -5,6 +5,7 @@ var walk_array = []
 var score_array = []
 var visited_array =[]
 var found_array = []
+var grid_size
 var base_id : int
 var base_pos : Vector3
 var player_pos = Vector3(0,0,0)

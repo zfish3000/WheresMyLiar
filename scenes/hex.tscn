@@ -42,6 +42,12 @@ shape = SubResource("SphereShape3D_tqp3w")
 script = ExtResource("9_mlyxx")
 metadata/_custom_type_script = "uid://ddxw0v0d051kh"
 
+[node name="Label3D" type="Label3D" parent="."]
+visible = false
+billboard = 1
+no_depth_test = true
+text = "asdasd"
+
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]

@@ -48,6 +48,8 @@ func set_label(score:String):
 func _ready() -> void:
 	SignalBus.base_defined.connect(_base_defined)
 	
+	$Label3D.text = str(index)
+	
 	if index == base_index:
 		base=true
 		GameManager.base_id = index
