@@ -14,5 +14,5 @@ func _process(delta: float) -> void:
 
 
 func _on_nav_moved() -> void:
-	var current_tile = GameManager.tile_array[$nav.complete_path[$nav.current_path_index]]
+	var current_tile = GameManager.tile_array[$nav.complete_path[$nav.current_path_index-1]]
 	current_tile.add_resources()

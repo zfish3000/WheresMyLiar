@@ -24,4 +24,5 @@ func spawn_hero():
 	var hero_scene : PackedScene = load("res://scenes/actor.tscn")
 	var hero = hero_scene.instantiate()
 	hero.setup(hex_index,GameManager.base_id)
+	hero.position = position
 	add_child(hero)

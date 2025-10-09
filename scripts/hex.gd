@@ -111,7 +111,7 @@ func _ready() -> void:
 		finder.position.y = 0
 		add_child(finder)
 		
-
+	find()
 	position.y += altitude
 	position.y = round(position.y+0.2)
 	position.y = clamp(position.y,0,0.17)

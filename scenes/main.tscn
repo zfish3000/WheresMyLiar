@@ -4,9 +4,9 @@
 [ext_resource type="Shader" uid="uid://dvcrrajh2qegl" path="res://assets/postprocessing.gdshader" id="1_tefeu"]
 [ext_resource type="Script" uid="uid://c1djhr360shxt" path="res://scripts/world.gd" id="2_o6xl0"]
 [ext_resource type="Shader" uid="uid://bg05amitbh15c" path="res://assets/sky.gdshader" id="3_tipki"]
+[ext_resource type="Texture2D" uid="uid://bdttl1l1ldg38" path="res://colorpalletes/4.tres" id="3_ya4ey"]
 [ext_resource type="Script" uid="uid://bohpwmymnnrq2" path="res://scripts/camera_3d.gd" id="4_85g3d"]
 [ext_resource type="Shader" uid="uid://decwbmks4clva" path="res://scenes/outline.gdshader" id="4_eb6dy"]
-[ext_resource type="Texture2D" uid="uid://bl413otetar20" path="res://colorpalletes/1.tres" id="4_ya4ey"]
 [ext_resource type="Script" uid="uid://bhy2of5hk31q0" path="res://scripts/hexgrid.gd" id="5_choun"]
 [ext_resource type="PackedScene" uid="uid://cc18uumvtbd18" path="res://hexglbs/forest.glb" id="6_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://dfb7kxmg2nuu" path="res://scenes/lilguy.tscn" id="7_o6xl0"]
@@ -14,7 +14,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
 shader = ExtResource("1_tefeu")
-shader_parameter/gradient_texture = ExtResource("4_ya4ey")
+shader_parameter/gradient_texture = ExtResource("3_ya4ey")
 shader_parameter/mix_strength = 0.5
 shader_parameter/opacity = 1.0
 shader_parameter/blend_mode = 0
@@ -358,7 +358,7 @@ render_target_update_mode = 4
 [node name="world" type="Node3D" parent="SubViewportContainer/SubViewport"]
 process_mode = 1
 script = ExtResource("2_o6xl0")
-daynight_time = 0.5
+daynight_time = 10.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/world"]
 environment = SubResource("Environment_h2yge")
