@@ -15,7 +15,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	$Sprite2D.position = lerp($Sprite2D.position, get_global_mouse_position(), 0.5)
 	var bgmaterial = load("res://scenes/menu.tscn::ShaderMaterial_i6lef")
-	bgmaterial.set_shader_parameter("speed",bgmaterial.get_shader_parameter("speed")+0.001)
 	
 
 
@@ -30,3 +29,17 @@ func new_game():
 
 func _on_button_3_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_button_mouse_entered() -> void:
+	var button1_shader = load("res://scenes/menu.tscn::ShaderMaterial_70i5f")
+	button1_shader
+	button1_shader.set_shader_parameter('intensityX',3.0)
+	button1_shader.set_shader_parameter('intensityY',3.0)
+
+
+func _on_button_mouse_exited() -> void:
+	var button1_shader = load("res://scenes/menu.tscn::ShaderMaterial_70i5f")
+	button1_shader
+	button1_shader.set_shader_parameter('intensityX',0.0)
+	button1_shader.set_shader_parameter('intensityY',0.0)

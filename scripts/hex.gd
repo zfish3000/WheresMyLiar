@@ -131,6 +131,8 @@ func _ready() -> void:
 func find():
 	if base:
 		$MeshInstance3D.mesh = meshes[5]
+	if evil:
+		return
 	if !found:
 		$MeshInstance3D.scale = Vector3(0.95,0.95,0.95)
 		match type:
@@ -181,18 +183,31 @@ func _base_defined():
 func _on_area_3d_mouse_entered() -> void:
 	scale = Vector3(0.7,0.7,0.7)
 	
-func build_lookout():
-	var LOOKOUT = load("res://hexmeshes/lookout.res")
-	var LOOKOUT_UC = load("res://hexmeshes/lookoutUC.res")
-	$MeshInstance3D.mesh = LOOKOUT_UC
-	var particle_scene : PackedScene = load("res://scenes/construction_particles.tscn")
-	var particle_child = particle_scene.instantiate()
-	add_child(particle_child)
-	#await get_tree().create_timer(5).timeout
-	particle_child.queue_free()
-	$MeshInstance3D.mesh = LOOKOUT
-	evil = true
-	reveal(5)
+func build_lookout(type:GameManager.Camp):
+	if type == GameManager.Camp.LOOKOUT:
+		var LOOKOUT = load("res://hexmeshes/lookout.res")
+		var LOOKOUT_UC = load("res://hexmeshes/lookoutUC.res")
+		$MeshInstance3D.mesh = LOOKOUT_UC
+		var particle_scene : PackedScene = load("res://scenes/construction_particles.tscn")
+		var particle_child = particle_scene.instantiate()
+		add_child(particle_child)
+		await get_tree().create_timer(2).timeout
+		particle_child.queue_free()
+		$MeshInstance3D.mesh = LOOKOUT
+		evil = true
+		reveal(5)
+	if type == GameManager.Camp.GATHERER:
+		var LOOKOUT = load("res://hexmeshes/lookout.res")
+		var LOOKOUT_UC = load("res://hexmeshes/lookoutUC.res")
+		$MeshInstance3D.mesh = LOOKOUT_UC
+		var particle_scene : PackedScene = load("res://scenes/construction_particles.tscn")
+		var particle_child = particle_scene.instantiate()
+		add_child(particle_child)
+		await get_tree().create_timer(10000).timeout
+		particle_child.queue_free()
+		$MeshInstance3D.mesh = LOOKOUT
+		evil = true
+		reveal(5)
 	
 
 	

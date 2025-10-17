@@ -161,13 +161,9 @@ func setup(start_index: int, end_index: int) -> void:
 		print("Oh NO")
 		#queue_free()
 	complete_path = find_path(start_index, end_index)
-	print(complete_path)
-	print(actor)
-	print(global_position)
 
 
 func new_turn() -> void:
-	print(actor)
 	if moving or current_path_index >= complete_path.size():
 		return
 

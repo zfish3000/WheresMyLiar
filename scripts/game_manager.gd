@@ -15,6 +15,8 @@ var stone = 0
 var pop = 0
 var gold = 0
 
+enum Camp {LOOKOUT,GATHERER}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass

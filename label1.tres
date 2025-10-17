@@ -12,4 +12,4 @@ shadow_size = 0
 shadow_color = Color(0.0980392, 0.254902, 0.388235, 1)
 stacked_outline_count = 1
 stacked_outline_0/size = 50
-stacked_outline_0/color = Color(0.0980392, 0.254902, 0.388235, 1)
+stacked_outline_0/color = Color(0.772549, 0.47451, 0.219608, 1)

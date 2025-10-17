@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b2moqdfvdqvht"]
+[gd_scene load_steps=27 format=3 uid="uid://b2moqdfvdqvht"]
 
 [ext_resource type="Script" uid="uid://cia02h18arp7c" path="res://scripts/menu.gd" id="1_vjb58"]
 [ext_resource type="FontFile" uid="uid://84h2yrdfv5j6" path="res://assets/RustyHooks.ttf" id="1_yqeox"]
@@ -20,15 +20,16 @@ width = 128
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i6lef"]
 shader = ExtResource("2_g3eks")
 shader_parameter/gradient = SubResource("GradientTexture1D_70i5f")
-shader_parameter/circle_color = Color(0.0980392, 0.254902, 0.388235, 1)
+shader_parameter/circle_color = Color(0.772549, 0.47451, 0.219608, 1)
 shader_parameter/circle_multiplier = 15.0
-shader_parameter/speed = 0.05
+shader_parameter/speed = 0.5
 shader_parameter/direction = Vector2(1, 1)
 shader_parameter/rotation = Transform2D(0.525, 0.85, -0.85, 0.525, 0, 0)
 
 [sub_resource type="Gradient" id="Gradient_v86rl"]
 interpolation_mode = 2
-colors = PackedColorArray(0.25098, 0.00392157, 0, 1, 0.0980392, 0.254902, 0.388235, 1)
+offsets = PackedFloat32Array(0.00518135, 1)
+colors = PackedColorArray(0.25098, 0.00392157, 0, 1, 0.772549, 0.47451, 0.219608, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_13sgg"]
 gradient = SubResource("Gradient_v86rl")
@@ -52,7 +53,7 @@ shadow_color = Color(0.25098, 0, 0, 1)
 shadow_offset = Vector2(0, 0)
 stacked_outline_count = 1
 stacked_outline_0/size = 70
-stacked_outline_0/color = Color(0.0980392, 0.254902, 0.388235, 1)
+stacked_outline_0/color = Color(0.772549, 0.47451, 0.219608, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_g3eks"]
 font = ExtResource("2_con2f")
@@ -72,33 +73,23 @@ shader_parameter/intensityX = 3.0
 shader_parameter/intensityY = 3.0
 shader_parameter/seed = 42.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mhnvy"]
-content_margin_top = 20.0
-content_margin_bottom = 20.0
-bg_color = Color(0.25098, 0.00392157, 0, 1)
-border_width_right = 4610
-border_color = Color(0.0980392, 0.254902, 0.388235, 1)
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3eks"]
-content_margin_top = 20.0
-content_margin_bottom = 20.0
-bg_color = Color(0.0980392, 0.254902, 0.388235, 0)
-border_color = Color(0.0980392, 0.254902, 0.388235, 1)
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ytvr"]
-bg_color = Color(0.172549, 0.392157, 0.580392, 1)
-border_color = Color(0.270588, 0.2, 0.105882, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v86rl"]
+content_margin_top = 10.0
+content_margin_bottom = 30.0
 
 [sub_resource type="Theme" id="Theme_yqeox"]
 Button/colors/font_color = Color(1, 0.956863, 0.901961, 1)
 Button/font_sizes/font_size = 180
 Button/fonts/font = ExtResource("1_yqeox")
-Button/styles/focus = SubResource("StyleBoxFlat_mhnvy")
-Button/styles/hover = SubResource("StyleBoxFlat_mhnvy")
-Button/styles/normal = SubResource("StyleBoxFlat_g3eks")
-Button/styles/pressed = SubResource("StyleBoxFlat_4ytvr")
+Button/styles/normal = SubResource("StyleBoxFlat_v86rl")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_70i5f"]
+shader = ExtResource("2_mhnvy")
+shader_parameter/interval = 0.5
+shader_parameter/timeDelay = 0.0
+shader_parameter/intensityX = 0.0
+shader_parameter/intensityY = 0.0
+shader_parameter/seed = 42.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v86rl"]
 shader = ExtResource("2_mhnvy")
@@ -108,12 +99,28 @@ shader_parameter/intensityX = 3.0
 shader_parameter/intensityY = 3.0
 shader_parameter/seed = 42.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mj5lg"]
+shader = ExtResource("2_mhnvy")
+shader_parameter/interval = 0.5
+shader_parameter/timeDelay = 0.0
+shader_parameter/intensityX = 0.0
+shader_parameter/intensityY = 0.0
+shader_parameter/seed = 42.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_13sgg"]
 shader = ExtResource("2_mhnvy")
 shader_parameter/interval = 0.5
 shader_parameter/timeDelay = 0.0
 shader_parameter/intensityX = 3.0
 shader_parameter/intensityY = 3.0
+shader_parameter/seed = 42.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ufwb2"]
+shader = ExtResource("2_mhnvy")
+shader_parameter/interval = 0.5
+shader_parameter/timeDelay = 0.0
+shader_parameter/intensityX = 0.0
+shader_parameter/intensityY = 0.0
 shader_parameter/seed = 42.0
 
 [sub_resource type="Animation" id="Animation_mhnvy"]
@@ -158,7 +165,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1.02892),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.0980392, 0.254902, 0.388235, 0), Color(0.0980392, 0.254902, 0.388235, 1)]
+"values": [Color(0.25098, 0.00392157, 0, 0), Color(0.25098, 0.00392157, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4ytvr"]
@@ -205,10 +212,13 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -842.5
+offset_right = 842.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_direction = 1
 layout_mode = 2
 theme_override_constants/separation = -5
 
@@ -240,6 +250,7 @@ text = " "
 flat = true
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Button"]
+material = SubResource("ShaderMaterial_70i5f")
 layout_mode = 0
 offset_right = 3605.0
 offset_bottom = 145.0
@@ -259,6 +270,7 @@ text = " "
 flat = true
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Button2"]
+material = SubResource("ShaderMaterial_mj5lg")
 layout_mode = 0
 offset_right = 3605.0
 offset_bottom = 145.0
@@ -277,6 +289,7 @@ text = " "
 flat = true
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Button3"]
+material = SubResource("ShaderMaterial_ufwb2")
 layout_mode = 0
 offset_right = 3605.0
 offset_bottom = 145.0
@@ -296,6 +309,7 @@ position = Vector2(960, 540)
 texture = ExtResource("5_4ytvr")
 
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Button2" to="." method="_on_button_2_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/VBoxContainer/Button2" to="." method="_on_button_2_mouse_exited"]

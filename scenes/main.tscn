@@ -1,16 +1,27 @@
-[gd_scene load_steps=26 format=3 uid="uid://d3tdqoloywmmg"]
+[gd_scene load_steps=30 format=3 uid="uid://d3tdqoloywmmg"]
 
 [ext_resource type="Script" uid="uid://bodje56a2exsf" path="res://scripts/main.gd" id="1_85g3d"]
 [ext_resource type="Shader" uid="uid://dvcrrajh2qegl" path="res://assets/postprocessing.gdshader" id="1_tefeu"]
+[ext_resource type="FontFile" uid="uid://84h2yrdfv5j6" path="res://assets/RustyHooks.ttf" id="2_a8y0u"]
 [ext_resource type="Script" uid="uid://c1djhr360shxt" path="res://scripts/world.gd" id="2_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://dijgb626327ju" path="res://assets/UIBase.png" id="3_jkv2x"]
 [ext_resource type="Shader" uid="uid://bg05amitbh15c" path="res://assets/sky.gdshader" id="3_tipki"]
-[ext_resource type="Texture2D" uid="uid://c2mq3mrcr0mtx" path="res://assets/pallete.png" id="3_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://bdttl1l1ldg38" path="res://colorpalletes/4.tres" id="3_ya4ey"]
 [ext_resource type="Script" uid="uid://bohpwmymnnrq2" path="res://scripts/camera_3d.gd" id="4_85g3d"]
 [ext_resource type="Shader" uid="uid://decwbmks4clva" path="res://scenes/outline.gdshader" id="4_eb6dy"]
+[ext_resource type="Texture2D" uid="uid://dss5isigikvm8" path="res://assets/UIIconsResourcest.png" id="4_jbj1t"]
 [ext_resource type="Script" uid="uid://bhy2of5hk31q0" path="res://scripts/hexgrid.gd" id="5_choun"]
 [ext_resource type="PackedScene" uid="uid://cc18uumvtbd18" path="res://hexglbs/forest.glb" id="6_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://dfb7kxmg2nuu" path="res://scenes/lilguy.tscn" id="7_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://i1li7i8liyit" path="res://assets/mouse.png" id="10_choun"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_muem4"]
+font = ExtResource("2_a8y0u")
+font_size = 40
+font_color = Color(0.25098, 0.00784314, 0, 1)
+shadow_size = 10
+shadow_color = Color(0.776471, 0.47451, 0.223529, 1)
+shadow_offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
 shader = ExtResource("1_tefeu")
@@ -222,8 +233,8 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.0980392, -0.25, 0, 0.25, 0, 0.0980392, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0.566667, 1.24)
+"points": PackedFloat32Array(0.25098, -0.25, 0, 0.25, 0, 0.25098, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.55, 2.26667)
 }
 tracks/2/type = "bezier"
 tracks/2/imported = false
@@ -233,8 +244,8 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.254902, -0.25, 0, 0.25, 0, 0.254902, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0.566667, 2.88167)
+"points": PackedFloat32Array(0.00392157, -0.25, 0, 0.25, 0, 0.00392157, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.55, 2.26667)
 }
 tracks/3/type = "bezier"
 tracks/3/imported = false
@@ -244,8 +255,8 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.388235, -0.25, 0, 0.25, 0, 0.388235, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0.575, 2.88167)
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.55, 2.26667)
 }
 tracks/4/type = "bezier"
 tracks/4/imported = false
@@ -256,7 +267,7 @@ tracks/4/loop_wrap = true
 tracks/4/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0.575, 2.88167)
+"times": PackedFloat32Array(0.55, 2.26667)
 }
 tracks/5/type = "bezier"
 tracks/5/imported = false
@@ -308,6 +319,65 @@ color = Color(0.0980392, 0.254902, 0.388235, 1)
 
 [node name="IntroTransition2" type="CanvasLayer" parent="."]
 layer = 11
+
+[node name="Label" type="Label" parent="IntroTransition2"]
+z_index = 11
+offset_top = 80.0
+offset_right = 120.0
+offset_bottom = 174.0
+text = "LALA"
+label_settings = SubResource("LabelSettings_muem4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="IntroTransition2"]
+z_index = 11
+offset_top = 248.0
+offset_right = 120.0
+offset_bottom = 342.0
+text = "LALA"
+label_settings = SubResource("LabelSettings_muem4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="IntroTransition2"]
+z_index = 11
+offset_top = 376.0
+offset_right = 120.0
+offset_bottom = 470.0
+text = "LALA"
+label_settings = SubResource("LabelSettings_muem4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="IntroTransition2"]
+z_index = 11
+offset_top = 544.0
+offset_right = 120.0
+offset_bottom = 638.0
+text = "LALA"
+label_settings = SubResource("LabelSettings_muem4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite0002" type="Sprite2D" parent="IntroTransition2"]
+z_index = 7
+position = Vector2(960, 540)
+scale = Vector2(6, 6)
+texture = ExtResource("3_jkv2x")
+
+[node name="Sprite0004" type="Sprite2D" parent="IntroTransition2"]
+z_index = 7
+position = Vector2(960, 540)
+rotation = 3.14159
+scale = Vector2(6, 6)
+texture = ExtResource("3_jkv2x")
+
+[node name="Sprite0003" type="Sprite2D" parent="IntroTransition2"]
+z_index = 7
+position = Vector2(960, 540)
+scale = Vector2(6, 6)
+texture = ExtResource("4_jbj1t")
 
 [node name="ColorGrading" type="CanvasLayer" parent="."]
 layer = 10
@@ -420,44 +490,21 @@ wait_time = 1.2
 one_shot = true
 autostart = true
 
-[node name="Label" type="Label" parent="."]
-offset_left = -1.0
-offset_top = 147.0
-offset_right = 193.0
-offset_bottom = 241.0
-
-[node name="Label2" type="Label" parent="."]
-offset_left = -1.0
-offset_top = 187.0
-offset_right = 193.0
-offset_bottom = 281.0
-
-[node name="Label3" type="Label" parent="."]
-offset_left = -1.0
-offset_top = 279.0
-offset_right = 193.0
-offset_bottom = 373.0
-
-[node name="Label4" type="Label" parent="."]
-offset_left = -1.0
-offset_top = 350.0
-offset_right = 193.0
-offset_bottom = 444.0
-
 [node name="Button" type="Button" parent="."]
-offset_right = 253.0
+offset_left = 144.0
+offset_right = 397.0
 offset_bottom = 127.0
 text = "Return To Base"
 
 [node name="Button2" type="Button" parent="."]
-offset_left = 506.0
-offset_right = 759.0
+offset_left = 650.0
+offset_right = 903.0
 offset_bottom = 127.0
 text = "Scouts"
 
 [node name="CheckButton" type="CheckButton" parent="."]
-offset_left = 253.0
-offset_right = 506.0
+offset_left = 397.0
+offset_right = 650.0
 offset_bottom = 127.0
 text = "Follow Player"
 
