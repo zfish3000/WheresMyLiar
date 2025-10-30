@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw2up6tumm3e5"]
+
+[ext_resource type="Script" uid="uid://c06kc2uoiaqnb" path="res://gatherer_lo.gd" id="1_yfpo5"]
+[ext_resource type="PackedScene" uid="uid://bptd8usm67glg" path="res://Gatherer.tscn" id="2_nwwu8"]
+
+[node name="GathererLO" type="Node3D"]
+script = ExtResource("1_yfpo5")
+actor_scene = ExtResource("2_nwwu8")

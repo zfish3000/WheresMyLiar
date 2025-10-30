@@ -14,15 +14,13 @@ func _ready() -> void:
 	moonlight_cycle.set_loops()
 	sub_viewport.size = get_viewport().size
 	GameManager.current_camera = $Node3D/Camera3D
+	GameManager.camera = $Node3D/Camera3D
 	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if $DirectionalLight3D.rotation_degrees.y >0 and $DirectionalLight3D.rotation_degrees.y <-180:
-		$DirectionalLight3D.light_energy = 0
-	elif $DirectionalLight3D.rotation_degrees.y >0 and $DirectionalLight3D.rotation_degrees.y <180:
-		$DirectionalLight3D.light_energy = 1
+	pass
 		
 		
 	if Input.is_action_just_pressed("mouse_left"):

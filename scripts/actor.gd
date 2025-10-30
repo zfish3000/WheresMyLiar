@@ -23,6 +23,9 @@ func setup(start_index,end_index):
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("step"):
 		$nav.new_turn()
+	#var cam_pos = GameManager.camera.global_position
+	#cam_pos.y = 0
+	#look_at(cam_pos)
 #
 #func setup(start_index: int, end_index: int) -> void:
 	#global_position = GameManager.tile_array[start_index].position

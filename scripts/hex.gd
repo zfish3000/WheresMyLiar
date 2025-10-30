@@ -203,11 +203,16 @@ func build_lookout(type:GameManager.Camp):
 		var particle_scene : PackedScene = load("res://scenes/construction_particles.tscn")
 		var particle_child = particle_scene.instantiate()
 		add_child(particle_child)
-		await get_tree().create_timer(10000).timeout
+		await get_tree().create_timer(2).timeout
 		particle_child.queue_free()
 		$MeshInstance3D.mesh = LOOKOUT
 		evil = true
-		reveal(5)
+		var gatherer_lo :PackedScene = load("res://gatherer_lo.tscn")
+		var gatherer_lo_child = gatherer_lo.instantiate()
+		gatherer_lo_child.current_id = index
+		add_child(gatherer_lo_child)
+		
+		
 	
 
 	

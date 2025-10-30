@@ -1,31 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkkal5ayoa05i"]
+[gd_scene load_steps=6 format=3 uid="uid://bkkal5ayoa05i"]
 
 [ext_resource type="Script" uid="uid://umk0m2qqf1ag" path="res://scripts/actor.gd" id="1_x4c43"]
 [ext_resource type="Texture2D" uid="uid://byv5tcjkwjyfo" path="res://assets/icon.svg" id="2_0qi0m"]
 [ext_resource type="Script" uid="uid://bbdggeyy0idei" path="res://scripts/nav.gd" id="3_35erh"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_x4c43"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_0qi0m")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0jvkp"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("2_0qi0m")
+albedo_texture_force_srgb = true
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_0qi0m"]
+material = SubResource("StandardMaterial3D_0jvkp")
 
 [node name="actor" type="Node3D"]
 script = ExtResource("1_x4c43")
-
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-flip_h = true
-billboard = 2
-no_depth_test = true
-sprite_frames = SubResource("SpriteFrames_x4c43")
-frame_progress = 0.0346504
 
 [node name="nav" type="Node3D" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("3_35erh")
 actor = NodePath("..")
 metadata/_custom_type_script = "uid://bbdggeyy0idei"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.711529, 0)
+mesh = SubResource("QuadMesh_0qi0m")

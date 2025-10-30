@@ -43,7 +43,6 @@ script = ExtResource("9_mlyxx")
 metadata/_custom_type_script = "uid://ddxw0v0d051kh"
 
 [node name="Label3D" type="Label3D" parent="."]
-visible = false
 billboard = 1
 no_depth_test = true
 text = "asdasd"

@@ -1,12 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://d3tdqoloywmmg"]
+[gd_scene load_steps=33 format=3 uid="uid://d3tdqoloywmmg"]
 
 [ext_resource type="Script" uid="uid://bodje56a2exsf" path="res://scripts/main.gd" id="1_85g3d"]
-[ext_resource type="Shader" uid="uid://dvcrrajh2qegl" path="res://assets/postprocessing.gdshader" id="1_tefeu"]
 [ext_resource type="FontFile" uid="uid://84h2yrdfv5j6" path="res://assets/RustyHooks.ttf" id="2_a8y0u"]
 [ext_resource type="Script" uid="uid://c1djhr360shxt" path="res://scripts/world.gd" id="2_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://dijgb626327ju" path="res://assets/UIBase.png" id="3_jkv2x"]
 [ext_resource type="Shader" uid="uid://bg05amitbh15c" path="res://assets/sky.gdshader" id="3_tipki"]
-[ext_resource type="Texture2D" uid="uid://bdttl1l1ldg38" path="res://colorpalletes/4.tres" id="3_ya4ey"]
 [ext_resource type="Script" uid="uid://bohpwmymnnrq2" path="res://scripts/camera_3d.gd" id="4_85g3d"]
 [ext_resource type="Shader" uid="uid://decwbmks4clva" path="res://scenes/outline.gdshader" id="4_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://dss5isigikvm8" path="res://assets/UIIconsResourcest.png" id="4_jbj1t"]
@@ -24,23 +22,48 @@ shadow_color = Color(0.776471, 0.47451, 0.223529, 1)
 shadow_offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
-shader = ExtResource("1_tefeu")
-shader_parameter/gradient_texture = ExtResource("3_ya4ey")
-shader_parameter/mix_strength = 0.5
-shader_parameter/opacity = 1.0
-shader_parameter/blend_mode = 0
-shader_parameter/hue_shift = 4.75e-08
+render_priority = 0
+shader = ExtResource("4_eb6dy")
+shader_parameter/zNear = 48.57
+shader_parameter/zFar = 100.0
+shader_parameter/enable_outline = true
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_thickness = 10.0
+shader_parameter/enable_color_limit = true
+shader_parameter/color_levels = 8
+shader_parameter/enable_color_palette = false
+shader_parameter/color1 = Color(1, 0.925, 0.839, 1)
+shader_parameter/color2 = Color(1, 0.831, 0.639, 1)
+shader_parameter/color3 = Color(1, 0.667, 0.369, 1)
+shader_parameter/color4 = Color(0.816, 0.506, 0.349, 1)
+shader_parameter/color5 = Color(0.553, 0.412, 0.478, 1)
+shader_parameter/color6 = Color(0.329, 0.306, 0.408, 1)
+shader_parameter/color7 = Color(0.125, 0.236, 0.337, 1)
+shader_parameter/color8 = Color(0.05, 0.169, 0.271, 1)
+shader_parameter/enable_dithering = true
+shader_parameter/dither_strength = 0.3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_trceg"]
 render_priority = 0
 shader = ExtResource("4_eb6dy")
-shader_parameter/shadows_enabled = false
-shader_parameter/highlights_enabled = false
-shader_parameter/shadow_strength = 0.4
-shader_parameter/highlight_strength = 0.1
-shader_parameter/highlight_color = Color(1, 1, 1, 1)
-shader_parameter/shadow_color = Color(0, 0, 0, 1)
-shader_parameter/is_perspective_camera = true
+shader_parameter/zNear = 0.05
+shader_parameter/zFar = 100.0
+shader_parameter/enable_outline = false
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_thickness = 10.0
+shader_parameter/enable_color_limit = true
+shader_parameter/color_levels = 8
+shader_parameter/enable_color_palette = true
+shader_parameter/color1 = Color(1, 0.925, 0.839, 1)
+shader_parameter/color2 = Color(1, 0.831, 0.639, 1)
+shader_parameter/color3 = Color(1, 0.667, 0.369, 1)
+shader_parameter/color4 = Color(0.816, 0.506, 0.349, 1)
+shader_parameter/color5 = Color(0.553, 0.412, 0.478, 1)
+shader_parameter/color6 = Color(0.329, 0.306, 0.408, 1)
+shader_parameter/color7 = Color(0.125, 0.236, 0.337, 1)
+shader_parameter/color8 = Color(0.05, 0.169, 0.271, 1)
+shader_parameter/enable_dithering = true
+shader_parameter/dither_strength = 0.3
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tipki"]
 frequency = 0.0256
@@ -88,10 +111,6 @@ sky = SubResource("Sky_85g3d")
 tonemap_mode = 2
 tonemap_exposure = 0.7
 tonemap_white = 1.5
-ssr_enabled = true
-ssao_enabled = true
-ssil_enabled = true
-glow_enabled = true
 glow_intensity = 1.0
 glow_map = SubResource("NoiseTexture2D_tipki")
 fog_enabled = true
@@ -116,16 +135,62 @@ dof_blur_far_transition = 200.0
 dof_blur_near_distance = 0.37
 dof_blur_amount = 0.05
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eb6dy"]
+render_priority = 0
+shader = ExtResource("4_eb6dy")
+shader_parameter/zNear = 0.05
+shader_parameter/zFar = 100.0
+shader_parameter/enable_outline = true
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_thickness = 1.0
+shader_parameter/enable_color_limit = false
+shader_parameter/color_levels = 6
+shader_parameter/enable_color_palette = true
+shader_parameter/color1 = Color(0.945098, 0.886275, 0.745098, 1)
+shader_parameter/color2 = Color(0.91, 0.791397, 0.4914, 1)
+shader_parameter/color3 = Color(0.909804, 0.792157, 0.490196, 1)
+shader_parameter/color4 = Color(0.395126, 0.397078, 0.226763, 1)
+shader_parameter/color5 = Color(0.266667, 0.317647, 0.384314, 1)
+shader_parameter/color6 = Color(0.266667, 0.317647, 0.384314, 1)
+shader_parameter/color7 = Color(0.0509804, 0.168627, 0.270588, 1)
+shader_parameter/color8 = Color(0, 0, 0, 1)
+shader_parameter/enable_dithering = true
+shader_parameter/dither_strength = 0.2
+
+[sub_resource type="QuadMesh" id="QuadMesh_trceg"]
+material = SubResource("ShaderMaterial_eb6dy")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="Gradient" id="Gradient_eb6dy"]
+resource_local_to_scene = true
+interpolation_mode = 2
+colors = PackedColorArray(0.357191, 0.357191, 0.357191, 1, 0.124083, 0.124083, 0.124083, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_eb6dy"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_trceg"]
+resource_local_to_scene = true
+width = 1024
+height = 1024
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_eb6dy")
+noise = SubResource("FastNoiseLite_eb6dy")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
 cull_mode = 2
-albedo_color = Color(0.235294, 0.560784, 1, 1)
-billboard_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("NoiseTexture2D_trceg")
+uv1_scale = Vector3(100, 100, 100)
+uv1_triplanar_sharpness = 0.0196248
 distance_fade_min_distance = 500.0
 distance_fade_max_distance = 300.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lquwl"]
 material = SubResource("StandardMaterial3D_lquwl")
-size = Vector2(5000, 5000)
+size = Vector2(10000, 10000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
 size = Vector3(2000, 0.5, 2000)
@@ -305,7 +370,6 @@ script = ExtResource("1_85g3d")
 
 [node name="IntroTransition" type="CanvasLayer" parent="."]
 layer = 11
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="IntroTransition"]
 z_index = 8
@@ -381,8 +445,10 @@ texture = ExtResource("4_jbj1t")
 
 [node name="ColorGrading" type="CanvasLayer" parent="."]
 layer = 10
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="ColorGrading"]
+visible = false
 z_index = 6
 material = SubResource("ShaderMaterial_272bh")
 anchors_preset = 15
@@ -416,14 +482,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stretch = true
 stretch_shrink = 3
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(640, 360)
-size_2d_override = Vector2i(960, 540)
+size = Vector2i(1920, 1080)
+size_2d_override = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="world" type="Node3D" parent="SubViewportContainer/SubViewport"]
@@ -436,7 +501,7 @@ environment = SubResource("Environment_h2yge")
 camera_attributes = SubResource("CameraAttributesPractical_1bvp3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/world"]
-transform = Transform3D(0.906724, -0.418398, -0.0528697, -0.110512, -0.356712, 0.927653, -0.406987, -0.835285, -0.36968, 0, 0, 0)
+transform = Transform3D(0.906725, -0.418395, -0.0528671, 0.346617, 0.667973, 0.658535, -0.240212, -0.615435, 0.750691, 0, 0, 0)
 shadow_enabled = true
 shadow_blur = 2.0
 
@@ -462,6 +527,9 @@ current = true
 fov = 60.0
 size = 6.74
 near = 0.001
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/world/Node3D/Camera3D"]
+mesh = SubResource("QuadMesh_trceg")
 
 [node name="LilGuy" parent="SubViewportContainer/SubViewport/world" instance=ExtResource("7_o6xl0")]
 visible = false

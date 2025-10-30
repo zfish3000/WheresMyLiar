@@ -6,9 +6,5 @@
 [node name="actor" instance=ExtResource("1_c81uy")]
 script = ExtResource("2_6ym2q")
 
-[node name="AnimatedSprite3D" parent="." index="0"]
-flip_v = true
-modulate = Color(1, 0, 1, 1)
-
 [connection signal="moved" from="nav" to="." method="_on_nav_moved"]
 [connection signal="reached_destination" from="nav" to="." method="_on_nav_reached_destination"]

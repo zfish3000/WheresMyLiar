@@ -19,7 +19,7 @@ func setup(start_index,end_index):
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("step"):
 		$nav.new_turn()
-
+	look_at(GameManager.camera.global_position)
 
 	
 
