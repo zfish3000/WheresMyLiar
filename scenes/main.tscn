@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://d3tdqoloywmmg"]
+[gd_scene load_steps=31 format=3 uid="uid://d3tdqoloywmmg"]
 
 [ext_resource type="Script" uid="uid://bodje56a2exsf" path="res://scripts/main.gd" id="1_85g3d"]
 [ext_resource type="FontFile" uid="uid://84h2yrdfv5j6" path="res://assets/RustyHooks.ttf" id="2_a8y0u"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cc18uumvtbd18" path="res://hexglbs/forest.glb" id="6_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://dfb7kxmg2nuu" path="res://scenes/lilguy.tscn" id="7_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://i1li7i8liyit" path="res://assets/mouse.png" id="10_choun"]
+[ext_resource type="Texture2D" uid="uid://15uu11el6pbd" path="res://water.jpg" id="11_trceg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_muem4"]
 font = ExtResource("2_a8y0u")
@@ -144,53 +145,33 @@ shader_parameter/enable_outline = true
 shader_parameter/outline_color = Color(0, 0, 0, 1)
 shader_parameter/outline_thickness = 1.0
 shader_parameter/enable_color_limit = false
-shader_parameter/color_levels = 6
+shader_parameter/color_levels = 8
 shader_parameter/enable_color_palette = true
-shader_parameter/color1 = Color(0.945098, 0.886275, 0.745098, 1)
-shader_parameter/color2 = Color(0.91, 0.791397, 0.4914, 1)
-shader_parameter/color3 = Color(0.909804, 0.792157, 0.490196, 1)
-shader_parameter/color4 = Color(0.395126, 0.397078, 0.226763, 1)
-shader_parameter/color5 = Color(0.266667, 0.317647, 0.384314, 1)
+shader_parameter/color1 = Color(0.94, 0.79524, 0.6768, 1)
+shader_parameter/color2 = Color(0.941176, 0.796078, 0.678431, 1)
+shader_parameter/color3 = Color(0.631373, 0.709804, 0.427451, 1)
+shader_parameter/color4 = Color(0.337255, 0.431373, 0.27451, 1)
+shader_parameter/color5 = Color(0.215686, 0.364706, 0.478431, 1)
 shader_parameter/color6 = Color(0.266667, 0.317647, 0.384314, 1)
 shader_parameter/color7 = Color(0.0509804, 0.168627, 0.270588, 1)
 shader_parameter/color8 = Color(0, 0, 0, 1)
-shader_parameter/enable_dithering = true
-shader_parameter/dither_strength = 0.2
+shader_parameter/enable_dithering = false
+shader_parameter/dither_strength = 0.3
 
 [sub_resource type="QuadMesh" id="QuadMesh_trceg"]
 material = SubResource("ShaderMaterial_eb6dy")
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="Gradient" id="Gradient_eb6dy"]
-resource_local_to_scene = true
-interpolation_mode = 2
-colors = PackedColorArray(0.357191, 0.357191, 0.357191, 1, 0.124083, 0.124083, 0.124083, 1)
-metadata/_snap_enabled = true
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_eb6dy"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_trceg"]
-resource_local_to_scene = true
-width = 1024
-height = 1024
-seamless = true
-seamless_blend_skirt = 1.0
-color_ramp = SubResource("Gradient_eb6dy")
-noise = SubResource("FastNoiseLite_eb6dy")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
-cull_mode = 2
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8y0u"]
 shading_mode = 0
-albedo_texture = SubResource("NoiseTexture2D_trceg")
+albedo_color = Color(0.308769, 0.308769, 0.308769, 1)
+albedo_texture = ExtResource("11_trceg")
 uv1_scale = Vector3(100, 100, 100)
-uv1_triplanar_sharpness = 0.0196248
-distance_fade_min_distance = 500.0
-distance_fade_max_distance = 300.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lquwl"]
-material = SubResource("StandardMaterial3D_lquwl")
-size = Vector2(10000, 10000)
+material = SubResource("StandardMaterial3D_a8y0u")
+size = Vector2(1000, 1000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
 size = Vector3(2000, 0.5, 2000)
@@ -252,28 +233,28 @@ tracks/4/keys = {
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
-tracks/5/type = "bezier"
+tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SubViewportContainer/SubViewport/world/Node3D/Camera3D:fov")
+tracks/5/path = NodePath("ColorGrading/ColorRect:material:shader_parameter/mix_strength")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(60, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("ColorGrading/ColorRect:material:shader_parameter/mix_strength")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.5]
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SubViewportContainer/SubViewport/world/Node3D/Camera3D:fov")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(60, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_7mycd"]
@@ -334,28 +315,28 @@ tracks/4/keys = {
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0.55, 2.26667)
 }
-tracks/5/type = "bezier"
+tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("SubViewportContainer/SubViewport/world/Node3D/Camera3D:fov")
-tracks/5/interp = 1
+tracks/5/path = NodePath("ColorGrading/ColorRect:material:shader_parameter/mix_strength")
+tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"handle_modes": PackedInt32Array(2, 2),
-"points": PackedFloat32Array(101.5, 0, 0, 1.5, 0, 55.5, -1.5, 0, 0, 0),
-"times": PackedFloat32Array(0.0666667, 2.5)
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("ColorGrading/ColorRect:material:shader_parameter/mix_strength")
-tracks/6/interp = 2
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0.52, 2.92),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.5]
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SubViewportContainer/SubViewport/world/Node3D/Camera3D:fov")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(101.5, 0, 0, 1.5, 0, 55.5, -1.5, 0, 0, 0),
+"times": PackedFloat32Array(0.0666667, 2.5)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5vw27"]
@@ -480,6 +461,10 @@ texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 8.0
+offset_right = 96.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch_shrink = 3
@@ -502,6 +487,7 @@ camera_attributes = SubResource("CameraAttributesPractical_1bvp3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/world"]
 transform = Transform3D(0.906725, -0.418395, -0.0528671, 0.346617, 0.667973, 0.658535, -0.240212, -0.615435, 0.750691, 0, 0, 0)
+light_energy = 0.5
 shadow_enabled = true
 shadow_blur = 2.0
 
@@ -558,28 +544,40 @@ wait_time = 1.2
 one_shot = true
 autostart = true
 
-[node name="Button" type="Button" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 999
+texture = ExtResource("10_choun")
+
+[node name="ButtonBoundingBox" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 128.0
+
+[node name="Button" type="Button" parent="ButtonBoundingBox"]
+layout_mode = 0
 offset_left = 144.0
 offset_right = 397.0
 offset_bottom = 127.0
+mouse_behavior_recursive = 1
 text = "Return To Base"
 
-[node name="Button2" type="Button" parent="."]
+[node name="Button2" type="Button" parent="ButtonBoundingBox"]
+layout_mode = 0
 offset_left = 650.0
 offset_right = 903.0
 offset_bottom = 127.0
 text = "Scouts"
 
-[node name="CheckButton" type="CheckButton" parent="."]
+[node name="CheckButton" type="CheckButton" parent="ButtonBoundingBox"]
+layout_mode = 0
 offset_left = 397.0
 offset_right = 650.0
 offset_bottom = 127.0
 text = "Follow Player"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 999
-texture = ExtResource("10_choun")
-
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="pressed" from="Button" to="SubViewportContainer/SubViewport/world/Node3D" method="_on_button_pressed"]
-[connection signal="pressed" from="CheckButton" to="SubViewportContainer/SubViewport/world/Node3D" method="_on_check_button_pressed"]
+[connection signal="mouse_entered" from="ButtonBoundingBox" to="SubViewportContainer/SubViewport/world" method="_on_button_bounding_box_mouse_entered"]
+[connection signal="mouse_exited" from="ButtonBoundingBox" to="SubViewportContainer/SubViewport/world" method="_on_button_bounding_box_mouse_exited"]
+[connection signal="pressed" from="ButtonBoundingBox/Button" to="SubViewportContainer/SubViewport/world/Node3D" method="_on_button_pressed"]
+[connection signal="pressed" from="ButtonBoundingBox/CheckButton" to="SubViewportContainer/SubViewport/world/Node3D" method="_on_check_button_pressed"]

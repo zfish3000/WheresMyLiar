@@ -20,7 +20,7 @@ width = 128
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i6lef"]
 shader = ExtResource("2_g3eks")
 shader_parameter/gradient = SubResource("GradientTexture1D_70i5f")
-shader_parameter/circle_color = Color(0.772549, 0.47451, 0.219608, 1)
+shader_parameter/circle_color = Color(0.631373, 0.709804, 0.427451, 1)
 shader_parameter/circle_multiplier = 15.0
 shader_parameter/speed = 0.5
 shader_parameter/direction = Vector2(1, 1)
@@ -29,7 +29,7 @@ shader_parameter/rotation = Transform2D(0.525, 0.85, -0.85, 0.525, 0, 0)
 [sub_resource type="Gradient" id="Gradient_v86rl"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0.00518135, 1)
-colors = PackedColorArray(0.25098, 0.00392157, 0, 1, 0.772549, 0.47451, 0.219608, 1)
+colors = PackedColorArray(0.215686, 0.364706, 0.478431, 1, 0.631373, 0.709804, 0.427451, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_13sgg"]
 gradient = SubResource("Gradient_v86rl")
@@ -47,13 +47,13 @@ font = ExtResource("2_con2f")
 font_size = 200
 font_color = Color(1, 0.956863, 0.901961, 1)
 outline_size = 70
-outline_color = Color(0.25098, 0, 0, 1)
+outline_color = Color(0.215686, 0.364706, 0.478431, 1)
 shadow_size = 0
 shadow_color = Color(0.25098, 0, 0, 1)
 shadow_offset = Vector2(0, 0)
 stacked_outline_count = 1
 stacked_outline_0/size = 70
-stacked_outline_0/color = Color(0.772549, 0.47451, 0.219608, 1)
+stacked_outline_0/color = Color(0.631373, 0.709804, 0.427451, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_g3eks"]
 font = ExtResource("2_con2f")

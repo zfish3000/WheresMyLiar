@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cr8a3bds54sa1"]
+
+[ext_resource type="PackedScene" uid="uid://bkkal5ayoa05i" path="res://scenes/actor.tscn" id="1_deuxo"]
+[ext_resource type="Texture2D" uid="uid://ws4b2bfhxfs5" path="res://assets/gobby.png" id="2_u1xwi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1fs5"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("2_u1xwi")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_offset = Vector3(1.25, 0.36, 0)
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_ybdga"]
+material = SubResource("StandardMaterial3D_l1fs5")
+
+[node name="actor" instance=ExtResource("1_deuxo")]
+actor = 1
+
+[node name="MeshInstance3D" parent="." index="1"]
+visible = false
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7747, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_ybdga")

@@ -16,8 +16,7 @@ var guypos
 @export_range(0.05,0.2) var noise_roughness = 0.08
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		get_tree().reload_current_scene()
+	pass
 
 func _ready() -> void:
 	GameManager.grid_size 

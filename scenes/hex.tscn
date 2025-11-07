@@ -22,7 +22,7 @@ script = ExtResource("1_tqp3w")
 meshes = Array[Resource]([ExtResource("2_yklne"), ExtResource("3_mlyxx"), ExtResource("4_kl320"), SubResource("PlaceholderMesh_tqp3w"), ExtResource("5_l3gld"), ExtResource("6_3u7x0"), ExtResource("7_sx706"), ExtResource("8_yklne")])
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12, 0)
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, -0.12, 0)
 mesh = ExtResource("8_yklne")
 
 [node name="Area3D" type="Area3D" parent="."]
@@ -41,11 +41,6 @@ shape = SubResource("SphereShape3D_tqp3w")
 [node name="BuildingMaterial" type="Node" parent="."]
 script = ExtResource("9_mlyxx")
 metadata/_custom_type_script = "uid://ddxw0v0d051kh"
-
-[node name="Label3D" type="Label3D" parent="."]
-billboard = 1
-no_depth_test = true
-text = "asdasd"
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]

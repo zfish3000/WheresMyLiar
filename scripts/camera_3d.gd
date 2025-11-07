@@ -113,6 +113,7 @@ func _update_movement(delta):
 
 
 func _on_button_pressed() -> void:
+	get_viewport().set_input_as_handled()
 	follow_player = false
 	var tween = get_tree().create_tween()
 	var tween2 = get_tree().create_tween()

@@ -156,10 +156,10 @@ func setup(start_index: int, end_index: int) -> void:
 	destination = GameManager.tile_array[end_index]
 	if destination.found == false:
 		print("Oh NO")
-		#queue_free()
+		get_parent().queue_free()
 	if destination.type == 3:
 		print("Oh NO")
-		#queue_free()
+		get_parent().queue_free()
 	complete_path = find_path(start_index, end_index)
 
 
