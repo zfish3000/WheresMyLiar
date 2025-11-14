@@ -1,8 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://bptd8usm67glg"]
+[gd_scene load_steps=8 format=3 uid="uid://bptd8usm67glg"]
 
 [ext_resource type="PackedScene" uid="uid://bkkal5ayoa05i" path="res://scenes/actor.tscn" id="1_c81uy"]
 [ext_resource type="Script" uid="uid://4ehkft7np60b" path="res://gatherer.gd" id="2_6ym2q"]
 [ext_resource type="Texture2D" uid="uid://ws4b2bfhxfs5" path="res://assets/gobby.png" id="3_ljakg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2yv4d"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("3_ljakg")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_iot1n"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_2yv4d")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1fs5"]
 transparency = 3
@@ -16,16 +28,19 @@ billboard_mode = 1
 [sub_resource type="QuadMesh" id="QuadMesh_2yv4d"]
 material = SubResource("StandardMaterial3D_l1fs5")
 
-[node name="actor" instance=ExtResource("1_c81uy")]
+[node name="gatherer" instance=ExtResource("1_c81uy")]
 script = ExtResource("2_6ym2q")
 
 [node name="MeshInstance3D" parent="." index="1"]
-visible = false
+mesh = SubResource("QuadMesh_iot1n")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7747, 0)
+visible = false
 cast_shadow = 0
 mesh = SubResource("QuadMesh_2yv4d")
 
+[node name="Camera3D" type="Camera3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73524, 1.2848)
+
 [connection signal="moved" from="nav" to="." method="_on_nav_moved"]
-[connection signal="reached_destination" from="nav" to="." method="_on_nav_reached_destination"]

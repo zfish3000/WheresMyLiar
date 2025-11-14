@@ -351,6 +351,7 @@ script = ExtResource("1_85g3d")
 
 [node name="IntroTransition" type="CanvasLayer" parent="."]
 layer = 11
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="IntroTransition"]
 z_index = 8
@@ -467,7 +468,7 @@ offset_right = 96.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-stretch_shrink = 3
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
@@ -569,6 +570,13 @@ offset_right = 903.0
 offset_bottom = 127.0
 text = "Scouts"
 
+[node name="Button3" type="Button" parent="ButtonBoundingBox"]
+layout_mode = 0
+offset_left = 904.0
+offset_right = 1157.0
+offset_bottom = 127.0
+text = "Gatherer"
+
 [node name="CheckButton" type="CheckButton" parent="ButtonBoundingBox"]
 layout_mode = 0
 offset_left = 397.0
@@ -580,4 +588,6 @@ text = "Follow Player"
 [connection signal="mouse_entered" from="ButtonBoundingBox" to="SubViewportContainer/SubViewport/world" method="_on_button_bounding_box_mouse_entered"]
 [connection signal="mouse_exited" from="ButtonBoundingBox" to="SubViewportContainer/SubViewport/world" method="_on_button_bounding_box_mouse_exited"]
 [connection signal="pressed" from="ButtonBoundingBox/Button" to="SubViewportContainer/SubViewport/world/Node3D" method="_on_button_pressed"]
+[connection signal="pressed" from="ButtonBoundingBox/Button2" to="SubViewportContainer/SubViewport/world" method="_on_button_2_pressed"]
+[connection signal="pressed" from="ButtonBoundingBox/Button3" to="SubViewportContainer/SubViewport/world" method="_on_button_3_pressed"]
 [connection signal="pressed" from="ButtonBoundingBox/CheckButton" to="SubViewportContainer/SubViewport/world/Node3D" method="_on_check_button_pressed"]

@@ -3,7 +3,9 @@ extends Node3D
 ## The Time It Takes For The Sun To Make 1 Full Rotation In Minutes
 @export var daynight_time:float = 600
 @onready var sub_viewport: SubViewport = $".."
-@onready var ACTOR = preload("res://scout.tscn")
+@onready var GATHERER = preload("res://Gatherer.tscn")
+@onready var SCOUT = preload("res://scout.tscn")
+@onready var actor : PackedScene = GATHERER
 var button_hover = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,9 +32,9 @@ func _process(delta: float) -> void:
 			if raycast_result and raycast_result.has("collider"):
 				var clicked_tile = raycast_result.collider.get_parent()
 				print(clicked_tile.index)
-				var actor = ACTOR.instantiate()
-				actor.setup(GameManager.base_id, clicked_tile.index)
-				add_child(actor)
+				var actor_instance = actor.instantiate()
+				actor_instance.setup(GameManager.base_id, clicked_tile.index)
+				add_child(actor_instance)
 
 			else:
 				print("nothing right there :0")
@@ -70,3 +72,12 @@ func _on_button_bounding_box_mouse_entered() -> void:
 func _on_button_bounding_box_mouse_exited() -> void:
 	button_hover = false
 	print('goodbye')
+
+
+func _on_button_2_pressed() -> void:
+	actor = SCOUT
+	
+
+
+func _on_button_3_pressed() -> void:
+	actor = GATHERER

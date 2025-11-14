@@ -1,4 +1,5 @@
 extends Node3D
+class_name Actor
 enum ActorType {HERO,SCOUT,GATHERER,SOLDIER}
 @export var actor : ActorType 
 var start_index
@@ -30,10 +31,16 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("step"):
 		$nav.new_turn()
 	
-
+func hello():
+	print('Hello')
 
 func _on_nav_reached_destination() -> void:
 	if actor == ActorType.HERO:
 		pass
 	elif actor == ActorType.SCOUT:
 		GameManager.tile_array[end_index].reveal(5)
+	elif actor == ActorType.GATHERER:
+		pass
+
+func pleh():
+	pass
