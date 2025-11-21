@@ -1,0 +1,14 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c0ydav0egjuy0"]
+
+[ext_resource type="FontFile" uid="uid://84h2yrdfv5j6" path="res://ui/RustyHooks.ttf" id="1_g82nr"]
+
+[resource]
+font = ExtResource("1_g82nr")
+font_size = 100
+font_color = Color(1, 0.956863, 0.901961, 1)
+outline_size = 50
+outline_color = Color(0.0980392, 0.254902, 0.388235, 1)
+shadow_color = Color(0.25098, 0.00392157, 0, 0)
+stacked_outline_count = 1
+stacked_outline_0/size = 50
+stacked_outline_0/color = Color(0.25098, 0.00392157, 0, 1)

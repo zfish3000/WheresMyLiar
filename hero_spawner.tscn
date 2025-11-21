@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdcof5ri7v75v"]
-
-[ext_resource type="Script" uid="uid://cj6qyeymkt0cc" path="res://hero_spawner.gd" id="1_l1jcg"]
-
-[node name="HeroSpawner" type="Node3D"]
-script = ExtResource("1_l1jcg")

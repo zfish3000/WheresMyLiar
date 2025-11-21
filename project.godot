@@ -13,15 +13,19 @@ config_version=5
 config/name="WheresMyLair"
 run/main_scene="uid://b2moqdfvdqvht"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://assets/icon.svg"
+config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="res://sounds/default_bus_layout.tres"
 
 [autoload]
 
-Musicmanager="*res://scenes/managers/musicmanager.tscn"
-GameManager="*res://scenes/managers/GameManager.tscn"
-SignalBus="*res://scenes/managers/signal_bus.tscn"
-Raycaster="*res://scripts/raycaster.gd"
-SfxManager="*res://scenes/managers/sfxmanager.tscn"
+Musicmanager="*res://managers/musicmanager.tscn"
+GameManager="*res://managers/GameManager.tscn"
+SignalBus="*res://managers/signal_bus.tscn"
+Raycaster="*res://world/raycaster.gd"
+SfxManager="*res://managers/sfxmanager.tscn"
 
 [display]
 
@@ -29,6 +33,19 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="viewport"
 mouse_cursor/custom_image="uid://i1li7i8liyit"
+
+[file_customization]
+
+folder_colors={
+"res://actors/": "red",
+"res://managers/": "orange",
+"res://materials/": "yellow",
+"res://shaders/": "green",
+"res://sounds/": "teal",
+"res://ui/": "blue",
+"res://utilities/": "purple",
+"res://world/": "pink"
+}
 
 [input]
 

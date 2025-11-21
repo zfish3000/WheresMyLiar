@@ -1,0 +1,97 @@
+[gd_scene load_steps=14 format=3 uid="uid://bvyxsbciqrhxn"]
+
+[ext_resource type="FontFile" uid="uid://bl56h1xh7ye8" path="res://ui/BagelFatOne-Regular.ttf" id="1_3tidv"]
+
+[sub_resource type="Gradient" id="Gradient_v5ghr"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yklne"]
+gradient = SubResource("Gradient_v5ghr")
+
+[sub_resource type="Curve" id="Curve_mmpov"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.744318, 0.880503), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_kl320"]
+curve = SubResource("Curve_mmpov")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vbgcb"]
+particle_flag_align_y = true
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+direction = Vector3(0, 20, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+scale_curve = SubResource("CurveTexture_kl320")
+color_ramp = SubResource("GradientTexture1D_yklne")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3u7x0"]
+albedo_color = Color(0.59, 0.41654, 0.3422, 1)
+subsurf_scatter_strength = 1.0
+proximity_fade_distance = 0.01
+distance_fade_max_distance = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_k20oa"]
+material = SubResource("StandardMaterial3D_3u7x0")
+radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Skin" id="Skin_rq3rj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mlyxx"]
+shading_mode = 0
+albedo_color = Color(0.48, 0.48, 0.48, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xrbl7"]
+material = SubResource("StandardMaterial3D_mlyxx")
+radius = 0.1
+height = 0.2
+radial_segments = 16
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3tidv"]
+albedo_color = Color(0.627635, 0.627635, 0.627635, 1)
+
+[sub_resource type="TextMesh" id="TextMesh_cwf6n"]
+material = SubResource("StandardMaterial3D_3tidv")
+text = "smoke"
+font = ExtResource("1_3tidv")
+
+[node name="ConstructionParticles" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.164626, 0)
+lifetime = 0.3
+speed_scale = 0.8
+explosiveness = 0.6
+process_material = SubResource("ParticleProcessMaterial_vbgcb")
+draw_pass_1 = SubResource("SphereMesh_k20oa")
+draw_skin = SubResource("Skin_rq3rj")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.164626, 0)
+lifetime = 0.3
+speed_scale = 0.8
+explosiveness = 0.6
+process_material = SubResource("ParticleProcessMaterial_vbgcb")
+draw_pass_1 = SubResource("SphereMesh_xrbl7")
+draw_skin = SubResource("Skin_rq3rj")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.164626, 0)
+lifetime = 0.3
+speed_scale = 0.8
+explosiveness = 0.6
+process_material = SubResource("ParticleProcessMaterial_vbgcb")
+draw_pass_1 = SubResource("TextMesh_cwf6n")
+draw_skin = SubResource("Skin_rq3rj")
+
+[node name="GPUParticles3D4" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.164626, 0)
+lifetime = 0.3
+speed_scale = 0.8
+explosiveness = 0.6
+process_material = SubResource("ParticleProcessMaterial_vbgcb")
+draw_pass_1 = SubResource("TextMesh_cwf6n")
+draw_skin = SubResource("Skin_rq3rj")

@@ -1,0 +1,47 @@
+[gd_scene load_steps=13 format=3 uid="uid://c0pvtb1s4dm36"]
+
+[ext_resource type="Script" uid="uid://c7k8r5y2liatu" path="res://world/hex/hex.gd" id="1_x5fw3"]
+[ext_resource type="ArrayMesh" uid="uid://dwu060hd4wky" path="res://world/hex/hexmeshes/plain.tres" id="2_guoey"]
+[ext_resource type="ArrayMesh" uid="uid://doqytutb0qu14" path="res://world/hex/hexmeshes/plains.res" id="3_hkscb"]
+[ext_resource type="ArrayMesh" uid="uid://c7g2bmf8lrlk6" path="res://world/hex/hexmeshes/forest.res" id="4_wb1tr"]
+[ext_resource type="ArrayMesh" uid="uid://bhsqxsw34kgp" path="res://world/hex/hexmeshes/mountains.res" id="5_cusge"]
+[ext_resource type="ArrayMesh" uid="uid://b87u20ym7glnt" path="res://world/hex/hexmeshes/evil.res" id="6_2dqtl"]
+[ext_resource type="ArrayMesh" uid="uid://5uw30p7f7mly" path="res://world/hex/hexmeshes/village.res" id="7_n1j87"]
+[ext_resource type="ArrayMesh" uid="uid://naj3tmq125er" path="res://world/hex/hexmeshes/unfound.tres" id="8_vuhmv"]
+[ext_resource type="Script" uid="uid://ddxw0v0d051kh" path="res://world/hex/resource.gd" id="9_curdo"]
+
+[sub_resource type="PlaceholderMesh" id="PlaceholderMesh_x5fw3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6jg22"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tqp3w"]
+
+[node name="Hex" type="Node3D"]
+script = ExtResource("1_x5fw3")
+meshes = Array[Resource]([ExtResource("3_hkscb"), ExtResource("2_guoey"), ExtResource("4_wb1tr"), SubResource("PlaceholderMesh_x5fw3"), ExtResource("5_cusge"), ExtResource("6_2dqtl"), ExtResource("7_n1j87"), ExtResource("8_vuhmv")])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, -0.12, 0)
+mesh = ExtResource("8_vuhmv")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_6jg22")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("SphereShape3D_tqp3w")
+
+[node name="BuildingMaterial" type="Node" parent="."]
+script = ExtResource("9_curdo")
+metadata/_custom_type_script = "uid://ddxw0v0d051kh"
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]

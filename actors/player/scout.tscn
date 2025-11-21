@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://cr8a3bds54sa1"]
+
+[ext_resource type="PackedScene" uid="uid://bkkal5ayoa05i" path="res://actors/actor.tscn" id="1_6h5hj"]
+[ext_resource type="Script" uid="uid://kcjj5gn6mxqq" path="res://actors/player/scout.gd" id="2_m0ka4"]
+[ext_resource type="Texture2D" uid="uid://ws4b2bfhxfs5" path="res://actors/player/gobby.png" id="3_ip888"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xcdev"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("3_ip888")
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_8sobi"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_xcdev")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1fs5"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("3_ip888")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_offset = Vector3(1.25, 0.36, 0)
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_ybdga"]
+material = SubResource("StandardMaterial3D_l1fs5")
+
+[node name="actor" instance=ExtResource("1_6h5hj")]
+script = ExtResource("2_m0ka4")
+
+[node name="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("QuadMesh_8sobi")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7747, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("QuadMesh_ybdga")
