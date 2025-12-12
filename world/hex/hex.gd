@@ -99,6 +99,7 @@ func _ready() -> void:
 				add_child(hero_spawner)
 		if land == false:
 			type = 3
+			find()
 			building_material.set_resource(3)
 	elif base == true:
 		find()

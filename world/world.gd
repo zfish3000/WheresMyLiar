@@ -18,13 +18,11 @@ func _ready() -> void:
 	sub_viewport.size = get_viewport().size
 	GameManager.current_camera = $Node3D/Camera3D
 	GameManager.camera = $Node3D/Camera3D
-	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	$MeshInstance3D.rotation += Vector3(0,0.00001,0)
-	
 		
 		
 	if Input.is_action_just_pressed("mouse_left"):

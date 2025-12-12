@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d3tdqoloywmmg"]
+[gd_scene load_steps=28 format=3 uid="uid://d3tdqoloywmmg"]
 
 [ext_resource type="Script" uid="uid://bodje56a2exsf" path="res://world/main.gd" id="1_85g3d"]
 [ext_resource type="FontFile" uid="uid://84h2yrdfv5j6" path="res://ui/RustyHooks.ttf" id="2_a8y0u"]
@@ -256,12 +256,16 @@ _data = {
 &"start": SubResource("Animation_7mycd")
 }
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_op3e8"]
+viewport_path = NodePath("SubViewport")
+
 [node name="Node" type="Node"]
 process_mode = 3
 script = ExtResource("1_85g3d")
 
 [node name="IntroTransition" type="CanvasLayer" parent="."]
 layer = 11
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="IntroTransition"]
 z_index = 8
@@ -446,6 +450,23 @@ offset_left = 397.0
 offset_right = 650.0
 offset_bottom = 127.0
 text = "Follow Player"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 1032.0
+offset_top = 632.0
+offset_right = 1072.0
+offset_bottom = 672.0
+scale = Vector2(0.36, 0.36)
+texture = SubResource("ViewportTexture_op3e8")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 28.33, 4.913, 48.48)
+projection = 1
+size = 22.934
+near = 0.001
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="mouse_entered" from="ButtonBoundingBox" to="SubViewportContainer/SubViewport/world" method="_on_button_bounding_box_mouse_entered"]

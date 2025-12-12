@@ -8,6 +8,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	$SubViewport/Camera3D.global_position.x=$SubViewportContainer/SubViewport/world/Node3D/Camera3D.global_position.x
+	$SubViewport/Camera3D.global_position.z=$SubViewportContainer/SubViewport/world/Node3D/Camera3D.global_position.z
+	$SubViewport/Camera3D.global_rotation.y=$SubViewportContainer/SubViewport/world/Node3D.rotation.y
 	if GameManager.wood != null:
 		$UI/Label.text = str(GameManager.wood)
 		$UI/Label2.text = str(GameManager.stone)
