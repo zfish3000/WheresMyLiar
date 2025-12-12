@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0pvtb1s4dm36"]
+[gd_scene load_steps=12 format=3 uid="uid://c0pvtb1s4dm36"]
 
 [ext_resource type="Script" uid="uid://c7k8r5y2liatu" path="res://world/hex/hex.gd" id="1_x5fw3"]
 [ext_resource type="ArrayMesh" uid="uid://dwu060hd4wky" path="res://world/hex/hexmeshes/plain.tres" id="2_guoey"]
@@ -7,7 +7,6 @@
 [ext_resource type="ArrayMesh" uid="uid://bhsqxsw34kgp" path="res://world/hex/hexmeshes/mountains.res" id="5_cusge"]
 [ext_resource type="ArrayMesh" uid="uid://b87u20ym7glnt" path="res://world/hex/hexmeshes/evil.res" id="6_2dqtl"]
 [ext_resource type="ArrayMesh" uid="uid://5uw30p7f7mly" path="res://world/hex/hexmeshes/village.res" id="7_n1j87"]
-[ext_resource type="ArrayMesh" uid="uid://naj3tmq125er" path="res://world/hex/hexmeshes/unfound.tres" id="8_vuhmv"]
 [ext_resource type="Script" uid="uid://ddxw0v0d051kh" path="res://world/hex/resource.gd" id="9_curdo"]
 
 [sub_resource type="PlaceholderMesh" id="PlaceholderMesh_x5fw3"]
@@ -19,11 +18,11 @@ size = Vector3(0.2, 0.2, 0.2)
 
 [node name="Hex" type="Node3D"]
 script = ExtResource("1_x5fw3")
-meshes = Array[Resource]([ExtResource("3_hkscb"), ExtResource("2_guoey"), ExtResource("4_wb1tr"), SubResource("PlaceholderMesh_x5fw3"), ExtResource("5_cusge"), ExtResource("6_2dqtl"), ExtResource("7_n1j87"), ExtResource("8_vuhmv")])
+meshes = Array[Resource]([ExtResource("3_hkscb"), ExtResource("2_guoey"), ExtResource("4_wb1tr"), SubResource("PlaceholderMesh_x5fw3"), ExtResource("5_cusge"), ExtResource("6_2dqtl"), ExtResource("7_n1j87"), ExtResource("4_wb1tr")])
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, -0.12, 0)
-mesh = ExtResource("8_vuhmv")
+mesh = ExtResource("4_wb1tr")
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

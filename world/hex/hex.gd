@@ -11,8 +11,8 @@ var land
 var hot
 var high
 
-var smog_particles = preload("res://smog.tscn")
-var find_node = preload("res://finder.tscn")
+var smog_particles = preload("res://utilities/smog.tscn")
+var find_node = preload("res://utilities/finder.tscn")
 
 var mouse = false
 
@@ -93,7 +93,7 @@ func _ready() -> void:
 			else:
 				type=6
 				building_material.set_resource(6)
-				var hero_spawner_scene : PackedScene = load("res://hero_spawner.tscn")
+				var hero_spawner_scene : PackedScene = load("res://utilities/hero_spawner.tscn")
 				var hero_spawner = hero_spawner_scene.instantiate()
 				hero_spawner.hex_index = index
 				add_child(hero_spawner)
@@ -202,14 +202,14 @@ func build_lookout(type:GameManager.Camp):
 		var LOOKOUT = load("res://world/hex/hexmeshes/lookout.res")
 		var LOOKOUT_UC = load("res://world/hex/hexmeshes/lookoutUC.res")
 		$MeshInstance3D.mesh = LOOKOUT_UC
-		var particle_scene : PackedScene = load("res://construction_particles.tscn")
+		var particle_scene : PackedScene = load("res://utilities/construction_particles.tscn")
 		var particle_child = particle_scene.instantiate()
 		add_child(particle_child)
 		await get_tree().create_timer(2).timeout
 		particle_child.queue_free()
 		$MeshInstance3D.mesh = LOOKOUT
 		evil = true
-		var gatherer_lo :PackedScene = load("res://gatherer_lo.tscn")
+		var gatherer_lo :PackedScene = load("res://utilities/gatherer_lo.tscn")
 		var gatherer_lo_child = gatherer_lo.instantiate()
 		gatherer_lo_child.current_id = index
 		add_child(gatherer_lo_child)
@@ -219,7 +219,7 @@ func build_lookout(type:GameManager.Camp):
 
 	
 func reveal(size:float=1):
-	var reveal_scene : PackedScene = load("res://reveal.tscn")
+	var reveal_scene : PackedScene = load("res://utilities/reveal.tscn")
 	var reveal = reveal_scene.instantiate()
 	reveal.size = size
 	add_child(reveal)

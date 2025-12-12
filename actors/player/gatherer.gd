@@ -28,3 +28,7 @@ func func_build_camp():
 	tile.build_lookout(GameManager.Camp.GATHERER)
 	queue_free()
 	
+
+
+func _on_nav_moved() -> void:
+	GameManager.tile_array[$nav.current_path_index].add_resources()
