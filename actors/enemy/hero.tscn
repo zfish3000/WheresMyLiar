@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwsuhvurqg7ef"]
+[gd_scene load_steps=6 format=3 uid="uid://dwsuhvurqg7ef"]
 
 [ext_resource type="PackedScene" uid="uid://bkkal5ayoa05i" path="res://actors/actor.tscn" id="1_8mmub"]
 [ext_resource type="Texture2D" uid="uid://csalpnxk2wmt1" path="res://actors/enemy/alessandro.png" id="2_wrf76"]
@@ -15,7 +15,13 @@ billboard_mode = 1
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_780bu")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_8mmub"]
+resource_local_to_scene = true
+
 [node name="actor" instance=ExtResource("1_8mmub")]
 
 [node name="MeshInstance3D" parent="." index="1"]
 mesh = SubResource("QuadMesh_p1r5x")
+
+[node name="CollisionShape3D" parent="Detector" index="0"]
+shape = SubResource("SphereShape3D_8mmub")

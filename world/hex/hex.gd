@@ -24,10 +24,18 @@ var type
 var walkable = true
 var found = false
 
+var start = false
+var end = false
+
 var g
 var h
 var f
+
 var evil = false
+
+var active = false
+
+var hero_spawner
 
 @onready var building_material: BuildingMaterial = $BuildingMaterial
 
@@ -52,6 +60,7 @@ func _ready() -> void:
 	
 	if index == base_index:
 		base=true
+		evil=true
 		GameManager.base_id = index
 		GameManager.base_pos = position
 		SignalBus.base_defined.emit()
@@ -74,33 +83,35 @@ func _ready() -> void:
 		if moisture<0.01:
 			land = false
 			walkable = false
-		if altitude>=0.4:
-			type = 4
-			building_material.set_resource(4)
-			walkable = false
-		if altitude>=0.2 and altitude <0.4:
-			type=2
-			building_material.set_resource(2)
-		if altitude<0.2:
-			if village <0.5:
-				var bush = randi_range(0,3)
-				if bush < 3:
-					type=0
-					building_material.set_resource(0)
-				if bush == 3:
-					type=1
-					building_material.set_resource(1)
-			else:
-				type=6
-				building_material.set_resource(6)
-				var hero_spawner_scene : PackedScene = load("res://utilities/hero_spawner.tscn")
-				var hero_spawner = hero_spawner_scene.instantiate()
-				hero_spawner.hex_index = index
-				add_child(hero_spawner)
 		if land == false:
 			type = 3
 			find()
 			building_material.set_resource(3)
+		else:
+			if altitude>=0.4:
+				type = 4
+				building_material.set_resource(4)
+				walkable = false
+			if altitude>=0.2 and altitude <0.4:
+				type=2
+				building_material.set_resource(2)
+			if altitude<0.2:
+				if village <0.55:
+					var bush = randi_range(0,3)
+					if bush < 3:
+						type=0
+						building_material.set_resource(0)
+					if bush == 3:
+						type=1
+						building_material.set_resource(1)
+				else:
+					type=6
+					building_material.set_resource(6)
+					print("Village")
+					var hero_spawner_scene : PackedScene = load("res://utilities/hero_spawner.tscn")
+					hero_spawner = hero_spawner_scene.instantiate()
+					hero_spawner.hex_index = index
+					add_child(hero_spawner)
 	elif base == true:
 		find()
 		type = 5
@@ -141,18 +152,26 @@ func find():
 		match type:
 			0:
 				$MeshInstance3D.mesh = meshes[0]
+				score = 0.9
 			1:
 				$MeshInstance3D.mesh = meshes[1]
+				score = 1
 			2:
 				$MeshInstance3D.mesh = meshes[2]
+				score = 1.5
 			3:
 				$MeshInstance3D.mesh = meshes[3]
+				score = 3
 			4:
 				$MeshInstance3D.mesh = meshes[4]
+				score = 4
 			5:
 				$MeshInstance3D.mesh = meshes[5]
+				score = 0.5
 			6:
 				$MeshInstance3D.mesh = meshes[6]
+				score = 0.5
+				
 		var rotaterng = randi_range(0,3)
 		match rotaterng:
 			0:
@@ -166,7 +185,8 @@ func find():
 		found = true
 
 func _process(delta: float) -> void:
-	pass
+	$StartArrow.visible = start
+	$EndArrow.visible = end
 
 
 	
@@ -191,7 +211,7 @@ func build_lookout(type:GameManager.Camp):
 		var LOOKOUT = load("res://world/hex/hexmeshes/lookout.res")
 		var LOOKOUT_UC = load("res://world/hex/hexmeshes/lookoutUC.res")
 		$MeshInstance3D.mesh = LOOKOUT_UC
-		var particle_scene : PackedScene = load("res://scenes/construction_particles.tscn")
+		var particle_scene : PackedScene = load("res://utilities/construction_particles.tscn")
 		var particle_child = particle_scene.instantiate()
 		add_child(particle_child)
 		await get_tree().create_timer(2).timeout
@@ -215,6 +235,19 @@ func build_lookout(type:GameManager.Camp):
 		gatherer_lo_child.current_id = index
 		add_child(gatherer_lo_child)
 		
+func build_tower(str=1,range=1,spd=1):
+	var LOOKOUT = load("res://world/hex/hexmeshes/lookout.res")
+	var LOOKOUT_UC = load("res://world/hex/hexmeshes/lookoutUC.res")
+	$MeshInstance3D.mesh = LOOKOUT_UC
+	var particle_scene : PackedScene = load("res://utilities/construction_particles.tscn")
+	var particle_child = particle_scene.instantiate()
+	add_child(particle_child)
+	await get_tree().create_timer(2).timeout
+	particle_child.queue_free()
+	$MeshInstance3D.mesh = LOOKOUT
+	evil = true
+	reveal(5)
+	
 		
 	
 
@@ -232,5 +265,13 @@ func add_resources():
 	GameManager.pop += building_material.pop
 	GameManager.gold += building_material.money
 	
+func add_resources_custom(wood,stone,pop,money):
+	GameManager.wood += wood
+	GameManager.stone += stone
+	GameManager.pop += pop
+	GameManager.gold += money
 	
-	
+func convert_hex():
+	remove_child(hero_spawner)
+	$MeshInstance3D.mesh = load("res://world/hex/hexmeshes/lookout.res")
+	add_resources_custom(0,0,5,5)

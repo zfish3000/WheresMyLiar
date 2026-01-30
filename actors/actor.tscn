@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkkal5ayoa05i"]
+[gd_scene load_steps=7 format=3 uid="uid://bkkal5ayoa05i"]
 
 [ext_resource type="Script" uid="uid://umk0m2qqf1ag" path="res://actors/actor.gd" id="1_dtsdg"]
 [ext_resource type="Script" uid="uid://bbdggeyy0idei" path="res://actors/nav.gd" id="2_k3sg3"]
@@ -14,7 +14,13 @@ billboard_mode = 1
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_0jvkp")
 
-[node name="actor" type="Node3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_k3sg3"]
+radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dtsdg"]
+resource_local_to_scene = true
+
+[node name="actor" type="Node3D" groups=["hero", "player"]]
 script = ExtResource("1_dtsdg")
 
 [node name="nav" type="Node3D" parent="." node_paths=PackedStringArray("actor")]
@@ -26,5 +32,23 @@ metadata/_custom_type_script = "uid://bbdggeyy0idei"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7747, 0)
 cast_shadow = 0
 mesh = SubResource("QuadMesh_0qi0m")
+
+[node name="Detectable" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 8
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detectable"]
+shape = SubResource("SphereShape3D_k3sg3")
+debug_color = Color(1, 0, 0.2, 1)
+
+[node name="Detector" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detector"]
+shape = SubResource("SphereShape3D_dtsdg")
+debug_color = Color(1, 0, 0.2, 1)
 
 [connection signal="reached_destination" from="nav" to="." method="_on_nav_reached_destination"]

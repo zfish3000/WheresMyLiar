@@ -1,15 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bptd8usm67glg"]
+[gd_scene load_steps=7 format=3 uid="uid://bub3igdo8fe7q"]
 
-[ext_resource type="PackedScene" uid="uid://bkkal5ayoa05i" path="res://actors/actor.tscn" id="1_ehun7"]
-[ext_resource type="Script" uid="uid://4ehkft7np60b" path="res://actors/player/gatherer.gd" id="2_2ghhb"]
-[ext_resource type="Texture2D" uid="uid://ws4b2bfhxfs5" path="res://actors/player/gobby.png" id="3_eyp36"]
+[ext_resource type="PackedScene" uid="uid://bkkal5ayoa05i" path="res://actors/actor.tscn" id="1_cvh4g"]
+[ext_resource type="Script" uid="uid://b138wsr3pu282" path="res://actors/player/builder.gd" id="2_cvh4g"]
+[ext_resource type="Texture2D" uid="uid://ws4b2bfhxfs5" path="res://actors/player/gobby.png" id="3_cn550"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2yv4d"]
 resource_local_to_scene = true
 transparency = 3
 alpha_hash_scale = 1.0
 alpha_antialiasing_mode = 0
-albedo_texture = ExtResource("3_eyp36")
+albedo_texture = ExtResource("3_cn550")
 billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_iot1n"]
@@ -19,8 +19,8 @@ material = SubResource("StandardMaterial3D_2yv4d")
 [sub_resource type="SphereShape3D" id="SphereShape3D_ehun7"]
 resource_local_to_scene = true
 
-[node name="gatherer" instance=ExtResource("1_ehun7")]
-script = ExtResource("2_2ghhb")
+[node name="gatherer" instance=ExtResource("1_cvh4g")]
+script = ExtResource("2_cvh4g")
 
 [node name="MeshInstance3D" parent="." index="1"]
 mesh = SubResource("QuadMesh_iot1n")

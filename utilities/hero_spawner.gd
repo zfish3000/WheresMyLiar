@@ -5,11 +5,15 @@ var hex_index
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SignalBus.new_turn.connect(new_turn)
-	spawn_hero()
 	
 
 func new_turn():
-	pass
+	return
+	var rng = randf()
+	if rng <= 0.05:
+		if GameManager.hero_count < 10:
+			spawn_hero()
+			GameManager.hero_count += 1
 		
 
 

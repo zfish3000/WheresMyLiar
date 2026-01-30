@@ -15,6 +15,8 @@ var stone = 0
 var pop = 0
 var gold = 0
 
+var hero_count = 0
+
 var camera
 
 enum Camp {LOOKOUT,GATHERER}

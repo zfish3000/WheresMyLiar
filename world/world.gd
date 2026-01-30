@@ -5,8 +5,12 @@ extends Node3D
 @onready var sub_viewport: SubViewport = $".."
 @onready var GATHERER = preload("res://actors/player/Gatherer.tscn")
 @onready var SCOUT = preload("res://actors/player/scout.tscn")
-@onready var actor : PackedScene = GATHERER
+@onready var INVADER = preload("res://actors/player/invader.tscn")
+@onready var BUILDER = preload("uid://bub3igdo8fe7q")
+@onready var actor : PackedScene = BUILDER
 var button_hover = false
+var start_tile = null
+var end_tile = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#var daylight_cycle = create_tween()
@@ -19,25 +23,41 @@ func _ready() -> void:
 	GameManager.current_camera = $Node3D/Camera3D
 	GameManager.camera = $Node3D/Camera3D
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$MeshInstance3D.rotation += Vector3(0,0.00001,0)
-		
+	$MeshInstance3D.rotation += Vector3(0,0.0001,0)
+	$MeshInstance3D.global_position.x = GameManager.base_pos.x
+	$MeshInstance3D.global_position.z = GameManager.base_pos.z
+	var ocean_material = load("res://world/main.tscn::StandardMaterial3D_a8y0u")
 		
 	if Input.is_action_just_pressed("mouse_left"):
 		if button_hover == false:
 			var raycast_result = fire_clickable_raycast()
 			if raycast_result and raycast_result.has("collider"):
+				#Pick Start Tile
+				var clicked_tile = raycast_result.collider.get_parent()
+				if clicked_tile.evil != null:
+					if clicked_tile != start_tile and start_tile != null:
+						start_tile.start = false
+					start_tile = clicked_tile
+					start_tile.start = true
+					
+	if Input.is_action_just_pressed("mouse_right"):
+		if button_hover == false:
+			var raycast_result = fire_clickable_raycast()
+			if raycast_result and raycast_result.has("collider"):
+				#Pick End Tile
 				var clicked_tile = raycast_result.collider.get_parent()
 				print(clicked_tile.index)
+				end_tile = clicked_tile
+				end_tile.end = true
+				#if start_tile and end_tile:
 				var actor_instance = actor.instantiate()
-				actor_instance.setup(GameManager.base_id, clicked_tile.index)
+				actor_instance.setup(start_tile.index, end_tile.index)
 				add_child(actor_instance)
-
-			else:
-				print("nothing right there :0")
-
+		
+	if Input.is_action_just_pressed("step"):
+		SignalBus.emit_signal("new_turn")
 
 func _on_check_button_pressed() -> void:
 	pass # Replace with function body.
@@ -63,14 +83,6 @@ func fire_clickable_raycast() -> Dictionary:
 
 
 
-func _on_button_bounding_box_mouse_entered() -> void:
-	button_hover = true
-	print('hello')
-
-
-func _on_button_bounding_box_mouse_exited() -> void:
-	button_hover = false
-	print('goodbye')
 
 
 func _on_button_2_pressed() -> void:
@@ -80,3 +92,12 @@ func _on_button_2_pressed() -> void:
 
 func _on_button_3_pressed() -> void:
 	actor = GATHERER
+
+
+func _on_button_4_pressed() -> void:
+	actor = INVADER
+
+
+func _on_button_pressed() -> void:
+	$Node3D.global_position = GameManager.base_pos
+	

@@ -16,6 +16,8 @@ func setup(start_index,end_index):
 		global_position = GameManager.tile_array[start_index].position
 		
 func _on_nav_reached_destination() -> void:
+	GameManager.tile_array[end_index_mem].start = false
+	GameManager.tile_array[end_index_mem].end = false
 	if build_camp == false:
 		setup(end_index_mem,GameManager.base_id)
 	else:

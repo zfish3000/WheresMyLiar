@@ -9,6 +9,7 @@ var moving: bool = false
 var sprite: SpriteFrames
 var reached_destination_bool = false
 var recall = false
+var score_influence = 10000
 const GRID_WIDTH = 100
 
 signal moved
@@ -18,9 +19,9 @@ signal reached_destination
 func setup(start_index: int, end_index: int) -> void:
 	global_position = GameManager.tile_array[start_index].position
 	destination = GameManager.tile_array[end_index]
-	if destination.found == false:
-		print("Oh NO")
-		get_parent().queue_free()
+	#if destination.found == false:
+		#print("Oh NO")
+		#get_parent().queue_free()
 	if destination.type == 3:
 		print("Oh NO")
 		get_parent().queue_free()
@@ -79,8 +80,8 @@ func is_walkable(index: int) -> bool:
 	var tile = GameManager.tile_array[index]
 
 	
-	if !tile.walkable:
-		return false
+	#if !tile.walkable:
+		#return false
 	
 	return true
 
@@ -118,7 +119,7 @@ func find_path(start_index: int, goal_index: int) -> Array:
 		# Check all neighbors
 		for neighbor in get_neighbors(current):
 			# Cost to move to neighbor (1.0 for adjacent tiles)
-			var tentative_g_score = g_score[current] + 1.0
+			var tentative_g_score = g_score[current] + (GameManager.tile_array[current].score)
 			
 			# If this path to neighbor is better than any previous one
 			if not g_score.has(neighbor) or tentative_g_score < g_score[neighbor]:
